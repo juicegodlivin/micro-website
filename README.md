@@ -1,35 +1,36 @@
-# Erevos - Dark Ops AI Intelligence
+# Micro - AI Agent Stack
 
-> AI Agent Stack for Dark Operations - Unfiltered intelligence, real information, and powerful AI tools that explore beyond conventional boundaries.
+> Next-generation AI agent stack for prediction markets, real-time data intelligence, and decentralized trading insights.
 
 ## Overview
 
-Erevos is an AI agent stack designed to protect users while offering powerful intelligence tools that explore beyond conventional boundaries. We look through the dark places, find real information, and aren't afraid to disagree with you to provide accurate, unfiltered intelligence.
+Micro is a sophisticated AI agent stack designed for prediction markets and trading intelligence. Built with cutting-edge technology and real-time data integration, Micro provides unparalleled insights into token markets, social sentiment, and trading opportunities across the Solana ecosystem.
 
 ## Features
 
 ### Core Capabilities
 
-- **Unfiltered Information Access**: Bypasses conventional content filters and restrictions to access real information from sources others won't touch
-- **Dark Web Intelligence**: Sophisticated crawling and analysis of dark web sources, encrypted communications, and hidden services
-- **Adversarial Truth Seeking**: Trained to disagree with users when necessary to provide accurate information, even when inconvenient
-- **Multi-Source Validation**: Cross-references information across multiple intelligence sources to verify accuracy and detect disinformation
-- **Operational Security**: Built-in OPSEC protocols protect user identity while maintaining secure access to sensitive intelligence
-- **Real-Time Threat Analysis**: Continuous monitoring and analysis of emerging threats, vulnerabilities, and intelligence developments
+- **Live Prediction Markets**: Real-time prediction markets for token performance with AI-powered analysis
+- **Hot Tokens Dashboard**: Track trending Solana ecosystem tokens with live price data and market sentiment
+- **Social Intelligence**: Advanced sentiment analysis across social media and news sources  
+- **Pump.fun Integration**: Real-time feed of new token launches and trading activity
+- **AI-Powered Insights**: Machine learning models for price predictions and market analysis
+- **Wallet Integration**: Seamless connection with MetaMask, Phantom, and Solflare wallets
 
-### Intelligence Types
+### Intelligence Features
 
-- **Geopolitical Analysis**: Unbiased analysis of global events, conflicts, and political developments without corporate or governmental filtering
-- **Corporate Intelligence**: Deep investigation into corporate activities, financial irregularities, and business practices that may be hidden from public view
-- **Security Vulnerabilities**: Comprehensive vulnerability research and exploit analysis for defensive and educational purposes
-- **Social Engineering Intel**: Analysis of social manipulation techniques, propaganda campaigns, and information warfare tactics
+- **Market Sentiment Analysis**: Real-time analysis of social media sentiment and market indicators
+- **Price Prediction AI**: Advanced machine learning models for token price forecasting
+- **Whale Activity Monitoring**: Track large transactions and whale wallet movements
+- **Trading Signal Generation**: AI-generated trading signals based on multiple data sources
+- **Risk Assessment**: Automated risk scoring for tokens and trading positions
 
-### Integrations
+### Market Types
 
-- Tor Networks
-- OSINT Tools
-- Threat Intelligence Feeds
-- Dark Web APIs
+- **Token Performance Predictions**: Will specific tokens reach target prices?
+- **Market Trend Analysis**: Sector-wide trend predictions and analysis
+- **Launch Success Predictions**: AI assessment of new token launch potential
+- **Social Momentum Tracking**: Prediction markets based on social media momentum
 
 ## Quick Start
 
@@ -37,16 +38,17 @@ Erevos is an AI agent stack designed to protect users while offering powerful in
 
 - Node.js 18.0.0 or higher
 - Modern web browser with JavaScript enabled
+- Solana wallet (MetaMask, Phantom, or Solflare) for trading features
 
 ### Installation
 
-1. Clone or download this repository:
+1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/erevos-dark-ops.git
-   cd erevos-dark-ops
+   git clone https://github.com/juicegodlivin/micro-website.git
+   cd micro-website
    ```
 
-2. Install dependencies (optional, for development):
+2. Install dependencies:
    ```bash
    npm install
    ```
@@ -60,29 +62,34 @@ Erevos is an AI agent stack designed to protect users while offering powerful in
 
 ### Production Deployment
 
-For production deployment, simply serve the static files:
+For production deployment, serve the static files:
 
 ```bash
 npm run start
 ```
 
-Or deploy the files to any static hosting service like:
+Or deploy to any static hosting service:
 - Vercel
-- Netlify
+- Netlify  
 - GitHub Pages
 - AWS S3 + CloudFront
-- Your own web server
 
 ## Project Structure
 
 ```
-erevos-dark-ops/
-├── index.html          # Main application page
-├── styles.css          # Styling and theme
-├── script.js           # Application logic and interactions
-├── package.json        # Project configuration and dependencies
-├── README.md          # This file
-└── docs.html          # Documentation (to be created)
+micro-website/
+├── index.html              # Main landing page
+├── dashboard.html          # Prediction markets dashboard
+├── docs.html              # Documentation page
+├── styles.css             # Main styling
+├── dashboard.css          # Dashboard-specific styles
+├── script.js              # Core JavaScript functionality
+├── pump-proxy.js          # Pump.fun API integration
+├── pump-proxy-secure.js   # Secure Pump.fun proxy
+├── wallet-auth-system/    # Wallet authentication components
+├── package.json           # Project configuration
+├── README.md              # This file
+└── LICENSE                # MIT License
 ```
 
 ## Development
@@ -90,95 +97,115 @@ erevos-dark-ops/
 ### Available Scripts
 
 - `npm run start` - Start production server
-- `npm run dev` - Start development server with live reload (using @web/dev-server)
+- `npm run dev` - Start development server with live reload
 - `npm run lint` - Check JavaScript code quality (ESLint v9+)
 - `npm run lint:fix` - Fix JavaScript code issues automatically
 - `npm run validate` - Validate HTML structure
-- `npm run test` - Run tests (to be implemented)
 
-### Recent Security Improvements
+### API Integration
 
-**Version 1.0.1 Security Update:**
-- ✅ **Zero Vulnerabilities**: Updated all dependencies to secure versions
-- ✅ **ESLint v9**: Migrated to latest ESLint with enhanced security rules
-- ✅ **Modern Dev Server**: Replaced vulnerable live-server with @web/dev-server
-- ✅ **HTML Validation**: Fixed all accessibility and validation issues
-- ✅ **Dependency Audit**: All packages now use secure, up-to-date versions
+Micro integrates with several real-time data sources:
 
-### Code Quality
+- **CoinGecko API**: Live token pricing and market data
+- **Pump.fun API**: New token launches and trading activity  
+- **Social Media APIs**: Sentiment analysis from Twitter and Reddit
+- **Solana RPC**: Blockchain data and transaction monitoring
 
-The project includes ESLint configuration for maintaining code quality:
+### Recent Updates
 
-```bash
-npm run lint
-npm run lint:fix
-```
+**Latest Version Features:**
+- ✅ **Fixed Hot Tokens Navigation**: Resolved sidebar navigation getting stuck
+- ✅ **Real-time Data Integration**: Live pricing from CoinGecko API
+- ✅ **Pump.fun Feed**: Real-time new token launch monitoring
+- ✅ **Enhanced UI/UX**: Smooth animations and responsive design
+- ✅ **Wallet Authentication**: Multi-wallet support with secure integration
 
-### Browser Support
+## Browser Support
 
 - Chrome 90+
 - Firefox 88+
 - Safari 14+
 - Edge 90+
 
-## Security Considerations
+## Security & Privacy
 
-This project is designed with security in mind:
+Micro is built with security and privacy as core principles:
 
-- **Content Security Policy (CSP) Ready**: All inline styles and scripts are properly handled
-- **Secure Navigation**: External links include proper security attributes
-- **HTTPS Only**: Designed to work only over secure connections
-- **No Third-Party Tracking**: Privacy-focused implementation
-- **Secure Random Generation**: Uses cryptographically secure random number generation where available
-
-## Accessibility
-
-Erevos is built with accessibility as a priority:
-
-- **WCAG 2.1 AA Compliant**: Meets accessibility guidelines
-- **Screen Reader Support**: Full ARIA implementation
-- **Keyboard Navigation**: Complete keyboard accessibility
-- **Reduced Motion Support**: Respects user preferences
-- **High Contrast Support**: Enhanced visibility options
-- **Focus Management**: Proper focus indicators and management
+- **Content Security Policy (CSP)**: Prevents XSS attacks
+- **Secure API Calls**: All external API calls use HTTPS
+- **No Data Collection**: Privacy-focused with no tracking
+- **Secure Wallet Integration**: Industry-standard wallet security
+- **Rate Limiting**: API rate limiting to prevent abuse
 
 ## Performance
 
-- **Lightweight**: Minimal dependencies and optimized code
-- **Fast Loading**: Optimized assets and lazy loading
-- **Responsive**: Works on all device sizes
-- **Progressive Enhancement**: Works without JavaScript
-- **Modern CSS**: Uses CSS Grid and Flexbox for efficient layouts
+- **Lightweight**: Optimized for fast loading and smooth interactions
+- **Real-time Updates**: Efficient WebSocket connections for live data
+- **Responsive Design**: Works seamlessly on desktop and mobile
+- **Caching Strategy**: Smart caching for API data to reduce load times
+- **Progressive Enhancement**: Core functionality works without JavaScript
 
 ## Customization
 
 ### Theming
 
-The application supports both dark and light themes. The theme preference is automatically detected and saved locally.
-
-### Colors
-
-Main color variables can be customized in `styles.css`:
+Micro supports dynamic theming with CSS custom properties:
 
 ```css
 :root {
-  --color-accent: #ff4444;           /* Primary accent color */
-  --color-accent-secondary: #ffaa00;  /* Secondary accent color */
-  --color-bg-primary: #0a0a0a;       /* Primary background */
-  --color-text-primary: #ffffff;      /* Primary text */
+  --color-accent: #00d4ff;           /* Primary accent (cyan) */
+  --color-accent-glow: #4ecdc4;      /* Accent glow effect */
+  --color-bg-primary: #0f1419;       /* Dark background */
+  --color-text-primary: #ffffff;     /* Primary text */
 }
 ```
 
-### Content
+### Adding New Prediction Markets
 
-All content can be customized by editing the HTML files. The structure is semantic and easy to modify.
+Extend the prediction markets by modifying the `sectionContent` object in `dashboard.html`:
+
+```javascript
+const newMarket = {
+  title: 'New Market Type',
+  subtitle: 'Description of the new market',
+  action: () => loadNewMarketData()
+};
+```
+
+## API Documentation
+
+### Wallet Integration
+
+```javascript
+// Connect wallet
+const wallet = await connectWallet('phantom');
+
+// Get balance
+const balance = await getWalletBalance(wallet.publicKey);
+
+// Sign transaction
+const signature = await signTransaction(transaction);
+```
+
+### Market Data
+
+```javascript
+// Get hot tokens
+const hotTokens = await fetchHotTokens();
+
+// Get market predictions
+const predictions = await fetchPredictionMarkets();
+
+// Submit prediction
+await submitPrediction(marketId, prediction, amount);
+```
 
 ## Contributing
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature-name`
 3. Make your changes
-4. Test thoroughly
+4. Test thoroughly on the dashboard
 5. Commit your changes: `git commit -am 'Add feature'`
 6. Push to the branch: `git push origin feature-name`
 7. Create a Pull Request
@@ -187,14 +214,22 @@ All content can be customized by editing the HTML files. The structure is semant
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Disclaimer
+## Roadmap
 
-This project is for educational and research purposes. Users are responsible for ensuring their use complies with applicable laws and regulations. The developers are not responsible for any misuse of this software.
+- [ ] Advanced AI prediction models
+- [ ] Multi-chain support (Ethereum, Polygon)
+- [ ] Mobile app development
+- [ ] Advanced charting and technical analysis
+- [ ] Social trading features
+- [ ] DAO governance integration
 
 ## Support
 
-For support, please open an issue on the GitHub repository or contact the development team.
+For support, please:
+- Open an issue on the GitHub repository
+- Join our Discord community
+- Check the documentation at `/docs.html`
 
 ---
 
-**Erevos Intelligence** - Dark operations intelligence for the modern era.
+**Micro AI Agent Stack** - Next-generation prediction markets powered by AI intelligence.
