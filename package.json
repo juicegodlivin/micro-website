@@ -1,7 +1,7 @@
 {
-  "name": "erevos-dark-ops",
-  "version": "1.0.1",
-  "description": "AI Agent Stack for Dark Operations - Unfiltered intelligence, real information, and powerful AI tools that explore beyond conventional boundaries",
+  "name": "micro-website",
+  "version": "1.0.0",
+  "description": "Micro AI Agent Stack - Next-generation prediction markets and trading intelligence for the Solana ecosystem",
   "main": "index.html",
   "scripts": {
     "start": "npx serve .",
@@ -11,29 +11,31 @@
     "build": "echo 'Static site - no build process required'",
     "lint": "npx eslint script.js",
     "lint:fix": "npx eslint script.js --fix",
-    "validate": "npx html-validate index.html",
+    "validate": "npx html-validate index.html dashboard.html docs.html",
     "test": "echo 'No tests specified yet'",
     "deploy": "echo 'Deploy to your preferred hosting service'"
   },
   "keywords": [
     "ai",
-    "intelligence",
-    "dark-ops",
-    "security",
-    "osint",
-    "threat-intelligence",
-    "unfiltered",
-    "agent-stack"
+    "prediction-markets",
+    "trading",
+    "solana",
+    "blockchain",
+    "cryptocurrency",
+    "machine-learning",
+    "real-time-data",
+    "wallet-integration",
+    "defi"
   ],
-  "author": "Erevos Intelligence",
+  "author": "juicegodlivin <juicegodlivin@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/your-username/erevos-dark-ops",
+  "homepage": "https://github.com/juicegodlivin/micro-website",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-username/erevos-dark-ops.git"
+    "url": "git+https://github.com/juicegodlivin/micro-website.git"
   },
   "bugs": {
-    "url": "https://github.com/your-username/erevos-dark-ops/issues"
+    "url": "https://github.com/juicegodlivin/micro-website/issues"
   },
   "devDependencies": {
     "@web/dev-server": "^0.4.6",
