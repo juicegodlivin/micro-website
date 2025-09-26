@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro - AI Agent Stack</title>
+    <meta name="description" content="AI Agent Stack that monitors micro cap token launches and enhances prediction speed. Scrapes X & pump.fun to predict emerging Solana tokens with live betting markets.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- SVG Definitions for Feature Icons -->
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <linearGradient id="lightningGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#0099cc;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="starGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#0099cc;stop-opacity:0.8" />
+                <stop offset="100%" style="stop-color:#006699;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </svg>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="Micro Background.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+    
+    <div class="ca-section">
+        <button class="ca-button" id="tokenAddress" onclick="copyTokenAddress()">
+            <span class="ca-label">$MICRO:</span>
+            <span class="ca-address">MCR8...pA9s</span>
+            <span class="copy-icon">📋</span>
+        </button>
+    </div>
+    
+    <header class="header">
+        <nav class="nav" aria-label="Main navigation">
+            <div class="nav-brand">
+                <a href="index.html" class="logo">
+                    <img src="Micro Logo.png" alt="Micro Logo" class="micro-logo-image">
+                    <span class="logo-text">MICRO</span>
+                </a>
+            </div>
+            <ul class="nav-menu" role="menubar">
+                <li role="none">
+                    <a href="dashboard.html" class="nav-link" role="menuitem">Prediction Markets</a>
+                </li>
+                <li role="none">
+                    <a href="docs.html" class="nav-link" role="menuitem">Documentation</a>
+                </li>
+                <li role="none">
+                    <a href="https://x.com/erevos_ops" class="nav-link" role="menuitem" target="_blank" rel="noopener noreferrer">X Account</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main" id="main">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="container">
+                <div class="hero-layout hero-two-column">
+                    <!-- Left Column: Content & Stats -->
+                    <div class="hero-left">
+                        <div class="hero-content">
+                            <div class="hero-text-container">
+                                <h1 class="hero-title" id="hero-title">
+                                    <span class="hero-title-main">MICRO</span>
+                                    <span class="hero-title-sub">AI Agent Stack for Trend Prediction</span>
+                                </h1>
+                                <p class="hero-description">
+                                    <strong>AI-powered prediction engine</strong> that monitors micro cap launches in real-time. 
+                                    <strong>Bet on emerging tokens</strong> using advanced sentiment analysis from X and pump.fun.
+                                </p>
+                                <div class="hero-features">
+                                    <div class="feature-item">
+                                        <div class="feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none">
+                                                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="var(--color-accent)"/>
+                                                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#lightningGradient)" opacity="0.8"/>
+                                            </svg>
+                                        </div>
+                                        <span>Real-time Analysis</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <div class="feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none">
+                                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                                <circle cx="12" cy="12" r="6" fill="var(--color-accent)" opacity="0.3"/>
+                                                <circle cx="12" cy="12" r="2" fill="var(--color-accent)"/>
+                                                <path d="M12 7V12L15 15" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </div>
+                                        <span>High Accuracy</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <div class="feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none">
+                                                <path d="M12 2L15.09 8.26L22 9L17 14.74L18.18 21.02L12 17.77L5.82 21.02L7 14.74L2 9L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                                <path d="M12 2L15.09 8.26L22 9L17 14.74L18.18 21.02L12 17.77L5.82 21.02L7 14.74L2 9L8.91 8.26L12 2Z" fill="url(#starGradient)" opacity="0.6"/>
+                                                <circle cx="12" cy="12" r="3" fill="var(--color-accent)" opacity="0.8"/>
+                                            </svg>
+                                        </div>
+                                        <span>Solana Native</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hero-actions">
+                                <a href="dashboard.html" class="btn btn-primary">
+                                    Live Markets
+                                </a>
+                                <a href="docs.html" class="btn btn-secondary">
+                                    How It Works
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Dashboard Preview -->
+                    <div class="hero-right">
+                        <div class="dashboard-preview">
+                            <div class="preview-header">
+                                <h3 class="preview-title">Live Markets</h3>
+                                <div class="preview-badge">REAL-TIME</div>
+                            </div>
+                            <div class="preview-cards">
+                                <!-- Prediction Card 1 -->
+                                <div class="preview-card">
+                                    <div class="card-token">
+                                        <div class="token-icon bonk">
+                                            <img src="https://assets.coingecko.com/coins/images/28600/small/bonk.jpg" alt="BONK Logo" class="token-logo-image">
+                                        </div>
+                                        <div class="token-info">
+                                            <span class="token-name">$BONK</span>
+                                            <span class="ai-score">AI: 89%</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-question">Will $BONK pump +50% in 24h?</div>
+                                    <div class="card-odds">
+                                        <div class="odds-yes">YES 72¢</div>
+                                        <div class="odds-no">NO 28¢</div>
+                                    </div>
+                                </div>
+
+                                <!-- Prediction Card 2 -->
+                                <div class="preview-card">
+                                    <div class="card-token">
+                                        <div class="token-icon micro">
+                                            <img src="Micro Logo.png" alt="Micro Logo" class="token-logo-image">
+                                        </div>
+                                        <div class="token-info">
+                                            <span class="token-name">$MICRO</span>
+                                            <span class="ai-score">AI: 94%</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-question">Will $MICRO 10x in 30 days?</div>
+                                    <div class="card-odds">
+                                        <div class="odds-yes">YES 81¢</div>
+                                        <div class="odds-no">NO 19¢</div>
+                                    </div>
+                                </div>
+
+                                <!-- Prediction Card 3 -->
+                                <div class="preview-card">
+                                    <div class="card-token">
+                                        <div class="token-icon pepe">
+                                            <img src="https://assets.coingecko.com/coins/images/29850/small/pepe-token.jpeg" alt="PEPE Logo" class="token-logo-image">
+                                        </div>
+                                        <div class="token-info">
+                                            <span class="token-name">$PEPE</span>
+                                            <span class="ai-score">AI: 65%</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-question">Will $PEPE reach new ATH?</div>
+                                    <div class="card-odds">
+                                        <div class="odds-yes">YES 45¢</div>
+                                        <div class="odds-no">NO 55¢</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="preview-footer">
+                                <a href="dashboard.html" class="preview-link">View All Markets →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="capabilities" id="capabilities" aria-labelledby="capabilities-title">
+            <div class="container">
+                <div class="section-header">
+                        <h2 class="capabilities-title" id="capabilities-title">
+                            AI-Powered Prediction Engine
+                        </h2>
+                        <p class="capabilities-subtitle">
+                            Advanced machine learning algorithms monitor and predict micro cap token movements in real-time.
+                        </p>
+                </div>
+
+                <div class="capabilities-grid">
+                    <article class="capability-item">
+                        <div class="capability-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M3 3v6h6V3M15 3v6h6V3M3 15v6h6v-6M15 15v6h6v-6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <circle cx="6" cy="6" r="1" fill="currentColor"/>
+                                <circle cx="18" cy="6" r="1" fill="currentColor"/>
+                                <circle cx="6" cy="18" r="1" fill="currentColor"/>
+                                <circle cx="18" cy="18" r="1" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3 class="capability-title">Social Sentiment Analysis</h3>
+                        <p class="capability-description">
+                            Scrapes X (Twitter) and pump.fun chats to monitor real-time sentiment around emerging tokens. 
+                            Advanced NLP processes thousands of posts per minute for accurate market prediction.
+                        </p>
+                    </article>
+
+                    <article class="capability-item">
+                        <div class="capability-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L22 7V17L12 22L2 17V7L12 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <path d="M12 7L17 10V14L12 17L7 14V10L12 7Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3 class="capability-title">Live Prediction Markets</h3>
+                        <p class="capability-description">
+                            Interactive betting interface where viewers can wager on which tokens will uptrend. 
+                            Real-time odds updates based on AI analysis and market sentiment data.
+                        </p>
+                    </article>
+
+                    <article class="capability-item">
+                        <div class="capability-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <path d="M7 15V19L12 17L17 19V15" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <circle cx="9" cy="9" r="1.5" fill="currentColor"/>
+                                <circle cx="15" cy="9" r="1.5" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3 class="capability-title">Agent Stack Livestreams</h3>
+                        <p class="capability-description">
+                            Live streaming sessions where AI agents break down emerging tokens in real-time. 
+                            Interactive audience participation with live betting and Q&A during analysis.
+                        </p>
+                    </article>
+
+                    <article class="capability-item">
+                        <div class="capability-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M21 12C21 7.03 18.39 2.74 14.23 1.17A2 2 0 0 0 12 3V21A2 2 0 0 0 14.23 22.83C18.39 21.26 21 16.97 21 12Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <path d="M12 8V16M8 12H16" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <h3 class="capability-title">Solana Native Integration</h3>
+                        <p class="capability-description">
+                            Built specifically for Solana ecosystem with pump.fun integration. 
+                            Track micro cap launches, monitor wallet movements, and predict price action with on-chain data.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">Micro</span>
+                    <p class="footer-description">
+                        AI Agent Stack for token prediction markets.
+                    </p>
+                </div>
+
+                <nav class="footer-nav" aria-label="Footer navigation">
+                    <div class="footer-section">
+                        <h3 class="footer-section-title">Platform</h3>
+                        <ul class="footer-links">
+                            <li><a href="docs.html" class="footer-link">Documentation</a></li>
+                            <li><a href="https://x.com/storm_agents" class="footer-link" target="_blank" rel="noopener noreferrer">X Account</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3 class="footer-section-title">Security</h3>
+                        <ul class="footer-links">
+                            <li><a href="docs.html#security" class="footer-link">OPSEC</a></li>
+                            <li><a href="docs.html#security" class="footer-link">Privacy Policy</a></li>
+                            <li><a href="docs.html#security" class="footer-link">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">
+                    © 2025 Micro. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

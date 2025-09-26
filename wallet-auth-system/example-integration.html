@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wallet Auth System - Example Integration</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Wallet Auth System CSS -->
+  <link rel="stylesheet" href="wallet-auth.css">
+  
+  <!-- Your existing site styles (optional) -->
+  <style>
+    /* Example main content styles */
+    .main-content {
+      font-family: 'Inter', sans-serif;
+      color: white;
+      background: #000;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    
+    .main-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .main-title {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #ff4444;
+      margin-bottom: 1rem;
+    }
+    
+    .main-subtitle {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .wallet-info {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 500px;
+    }
+    
+    .disconnect-btn {
+      background: #ff4444;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    
+    .disconnect-btn:hover {
+      background: #ff6666;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <!-- Video Background (replace with your own video) -->
+    <div class="loading-video-background">
+      <video autoplay muted loop>
+        <source src="background-video.mp4" type="video/mp4">
+        <!-- Fallback if no video -->
+      </video>
+    </div>
+    
+    <div class="loading-video-overlay"></div>
+    
+    <div class="loading-container">
+      <div class="blood-drop-loader">
+        <div class="blood-drop"></div>
+        <div class="blood-drop"></div>
+        <div class="blood-drop"></div>
+      </div>
+      
+      <div class="loading-text">YOUR BRAND</div>
+      <div class="loading-subtitle">Initializing secure connection...</div>
+      
+      <div class="loading-progress">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressBar"></div>
+        </div>
+        <div class="loading-percentage" id="loadingPercentage">0%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Authentication Screen -->
+  <div class="auth-screen hidden" id="authScreen">
+    <div class="auth-backdrop"></div>
+    
+    <div class="auth-container">
+      <div class="auth-header">
+        <div class="auth-logo">Y</div>
+        <h1 class="auth-title">CONNECT WALLET</h1>
+        <p class="auth-subtitle">Choose your preferred wallet to access the platform</p>
+      </div>
+      
+      <div class="auth-body">
+        <div class="wallet-grid">
+          <div class="wallet-card" data-wallet="phantom">
+            <div class="wallet-card-inner">
+              <img class="wallet-icon" src="assets/phantom-wallet-logo.png" alt="Phantom Wallet" />
+              <div class="wallet-info">
+                <div class="wallet-name">PHANTOM</div>
+                <div class="wallet-desc">SOL • PROTOCOL</div>
+              </div>
+              <div class="connect-text">CONNECT</div>
+            </div>
+          </div>
+          
+          <div class="wallet-card" data-wallet="solflare">
+            <div class="wallet-card-inner">
+              <img class="wallet-icon" src="assets/solflare-wallet-logo.jpg" alt="Solflare Wallet" />
+              <div class="wallet-info">
+                <div class="wallet-name">SOLFLARE</div>
+                <div class="wallet-desc">SOL • SECURE</div>
+              </div>
+              <div class="connect-text">CONNECT</div>
+            </div>
+          </div>
+          
+          <div class="wallet-card" data-wallet="metamask">
+            <div class="wallet-card-inner">
+              <img class="wallet-icon" src="assets/metamask-wallet-logo.jpg" alt="MetaMask Wallet" />
+              <div class="wallet-info">
+                <div class="wallet-name">METAMASK</div>
+                <div class="wallet-desc">ETH • EVM</div>
+              </div>
+              <div class="connect-text">CONNECT</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="auth-footer">
+        <p class="auth-disclaimer">
+          🔒 SECURE & ENCRYPTED CONNECTION<br>
+          NEVER STORE YOUR PRIVATE KEYS OR PERSONAL INFORMATION
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content (Your Website) -->
+  <div class="main-content hidden" id="mainContent">
+    <div class="main-header">
+      <h1 class="main-title">Welcome!</h1>
+      <p class="main-subtitle">You have successfully connected your wallet</p>
+    </div>
+    
+    <div class="wallet-info">
+      <h3>Connected Wallet Info</h3>
+      <p id="walletType">Type: Not connected</p>
+      <p id="walletAddress">Address: Not connected</p>
+      <button class="disconnect-btn" onclick="disconnectWallet()">Disconnect & Restart</button>
+    </div>
+    
+    <!-- Your existing website content goes here -->
+    <div style="text-align: center; margin-top: 3rem;">
+      <p style="color: rgba(255, 255, 255, 0.7);">
+        Replace this section with your actual website content.<br>
+        This is just an example to show the integration working.
+      </p>
+    </div>
+  </div>
+
+  <!-- Wallet Auth System JavaScript -->
+  <script src="wallet-auth.js"></script>
+  
+  <!-- Your custom JavaScript -->
+  <script>
+    // Listen for wallet connection events
+    window.addEventListener('walletConnected', (event) => {
+      console.log('Wallet connected:', event.detail);
+      
+      // Update UI with wallet info
+      document.getElementById('walletType').textContent = `Type: ${event.detail.type}`;
+      document.getElementById('walletAddress').textContent = `Address: ${event.detail.address.slice(0, 6)}...${event.detail.address.slice(-4)}`;
+    });
+    
+    // Disconnect function
+    function disconnectWallet() {
+      if (window.walletAuth) {
+        window.walletAuth.forceReauth();
+      }
+    }
+    
+    // Optional: Customize loading duration
+    // window.walletAuth = new WalletAuthController({
+    //   loadingDuration: 5000, // 5 seconds instead of 10
+    //   enableDebugLogs: false  // Disable debug logs in production
+    // });
+  </script>
+</body>
+</html>

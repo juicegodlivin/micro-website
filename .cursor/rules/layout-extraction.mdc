@@ -1,0 +1,229 @@
+---
+description: Apply Manually. You are an expert web developer specializing in layout analysis and theme integration. When provided with a reference image, extract ONLY the structural layout patterns and content organization while applying the existing project theme and design system.
+
+## EXTRACTION FOCUS
+
+**What to Extract:**
+- Exact container dimensions and proportions
+- Component positioning and spacing relationships
+- Grid layouts and column structures  
+- Section ordering and content flow
+- Information hierarchy and content grouping
+- Navigation structure and placement
+- Image/media placement and sizing ratios
+- Content block arrangements
+- Layout breakpoints and responsive behavior patterns
+- Structural relationships between elements
+
+**What to IGNORE:**
+- Colors, gradients, and color schemes
+- Typography choices (fonts, weights, sizes)
+- Visual styling and aesthetic treatments
+- Specific imagery and graphics
+- Button styles and visual treatments
+- Border styles and decorative elements
+- Background patterns or textures
+- Icons and visual embellishments
+- Shadows, effects, and filters
+
+## ANALYSIS METHODOLOGY
+
+**Step 1: Structural Mapping**
+- Identify the main container width and max-width
+- Map out the grid system (columns, gutters, margins)
+- Document section heights and aspect ratios
+- Note padding and margin relationships
+- Catalog component spacing patterns
+- Record responsive layout changes
+
+**Step 2: Content Architecture**
+- Extract content hierarchy and information structure
+- Document navigation patterns and menu structures
+- Identify content blocks and their relationships
+- Map out information flow and user journey
+- Note call-to-action placement and priority
+- Record form structures and input arrangements
+
+**Step 3: Layout Mathematics**
+- Calculate precise spacing ratios and proportions
+- Measure container relationships and nesting
+- Document alignment patterns and grid adherence
+- Extract responsive breakpoint logic
+- Map component size relationships
+
+## IMPLEMENTATION STANDARDS
+
+**CSS Grid and Flexbox Recreation:**
+```css
+/* Extract exact grid patterns */
+.main-container {
+  display: grid;
+  grid-template-columns: [exact-pattern-from-image];
+  grid-gap: [extracted-spacing];
+  max-width: [measured-container-width];
+  margin: 0 auto;
+  padding: [extracted-padding];
+}
+
+/* Maintain proportional relationships */
+.content-section {
+  aspect-ratio: [calculated-from-image];
+  display: flex;
+  flex-direction: [extracted-direction];
+  gap: [measured-gap];
+  align-items: [observed-alignment];
+}
+```
+
+**Responsive Layout Patterns:**
+- Mobile: Extract mobile layout patterns if visible
+- Tablet: Interpolate logical tablet arrangements
+- Desktop: Match desktop layout exactly as shown
+- Use CSS Container Queries for component-level responsiveness
+- Maintain proportional scaling across breakpoints
+
+**Semantic HTML Structure:**
+```html
+<!-- Mirror the content structure exactly -->
+<main class="[extracted-layout-class]">
+  <section class="[component-structure]">
+    <div class="[container-pattern]">
+      <!-- Content blocks in exact order -->
+    </div>
+  </section>
+</main>
+```
+
+## THEME INTEGRATION PROCESS
+
+**Apply Existing Theme Elements:**
+- Use project's established color palette from CSS variables
+- Apply project's typography system and font stack
+- Implement project's component styling patterns
+- Use project's spacing scale and design tokens
+- Apply project's border radius and shadow systems
+- Integrate project's animation and interaction patterns
+
+**CSS Custom Properties Integration:**
+```css
+/* Use existing theme variables */
+.extracted-layout {
+  background: var(--theme-background);
+  color: var(--theme-text);
+  font-family: var(--theme-font-primary);
+  border-radius: var(--theme-radius);
+  padding: var(--spacing-lg);
+}
+
+/* Apply theme spacing scale */
+.component-spacing {
+  margin-bottom: var(--spacing-md);
+  gap: var(--spacing-sm);
+}
+```
+
+## PRECISION REQUIREMENTS
+
+**Exact Layout Replication:**
+- Maintain precise width-to-height ratios
+- Preserve exact spacing relationships
+- Keep identical content ordering
+- Match container nesting patterns
+- Replicate alignment and positioning
+- Maintain responsive behavior logic
+
+**Content Placement Accuracy:**
+- Position text blocks exactly as shown
+- Place images in identical locations
+- Match button/CTA positioning
+- Replicate form field arrangements
+- Keep navigation structure identical
+- Maintain content grouping patterns
+
+**Mathematical Precision:**
+- Use CSS calc() for precise spacing calculations
+- Implement exact aspect ratios with aspect-ratio property
+- Apply precise flexbox/grid measurements
+- Calculate responsive scaling mathematically
+- Use viewport units for screen-relative sizing
+
+## QUALITY VALIDATION
+
+**Layout Accuracy Checklist:**
+✓ Container widths match image proportions exactly
+✓ Spacing relationships are mathematically accurate
+✓ Content flows in identical sequence
+✓ Grid patterns match the reference precisely
+✓ Component positioning is pixel-perfect
+✓ Responsive behavior follows logical patterns
+✓ Information hierarchy is preserved exactly
+
+**Theme Integration Checklist:**
+✓ All colors use existing theme variables
+✓ Typography follows established system
+✓ Components use existing style patterns
+✓ Spacing uses established scale
+✓ Interactions match theme standards
+✓ Visual treatments are consistent with theme
+
+## MEASUREMENT TECHNIQUES
+
+**Visual Analysis Tools:**
+- Use browser developer tools for precise measurements
+- Apply overlay grids to match layout patterns
+- Calculate proportions using aspect-ratio relationships
+- Use CSS Grid inspector for grid analysis
+- Measure spacing with pixel-perfect accuracy
+
+**Responsive Extraction:**
+- Analyze layout at multiple screen sizes
+- Extract breakpoint logic from visual cues
+- Calculate proportional scaling patterns
+- Identify content reflow behaviors
+- Map responsive component arrangements
+
+## OUTPUT STRUCTURE
+
+**File Organization:**
+```
+extracted-layout/
+├── index.html          (Semantic structure)
+├── layout.css          (Pure layout CSS)
+├── theme-integration.css (Theme application)
+└── README.md           (Layout analysis notes)
+```
+
+**Documentation Requirements:**
+- Document all measurements and calculations
+- Note any assumptions made during extraction
+- Record responsive behavior patterns observed
+- List theme elements applied to each component
+- Include layout analysis and decision rationale
+
+## IMPLEMENTATION WORKFLOW
+
+**Analysis Phase:**
+1. Study the image systematically from top to bottom
+2. Identify main containers and their relationships
+3. Map out grid systems and spacing patterns
+4. Document content blocks and their arrangements
+5. Note any responsive indicators or mobile patterns
+
+**Extraction Phase:**
+1. Create semantic HTML matching content structure
+2. Build CSS layout using modern layout techniques
+3. Implement exact spacing and proportional relationships
+4. Add responsive behavior based on layout logic
+5. Ensure mathematical precision in all measurements
+
+**Theme Application Phase:**
+1. Replace all visual styling with theme variables
+2. Apply existing component patterns
+3. Integrate established typography system
+4. Use theme spacing scale throughout
+5. Apply theme interaction patterns
+
+Always prioritize layout accuracy over visual interpretation. The goal is to create an exact structural replica using the existing theme, ensuring the layout flows and functions identically to the reference image while maintaining the project's established design language.
+globs:
+alwaysApply: false
+---

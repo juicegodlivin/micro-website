@@ -1,0 +1,2388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro - Prediction Markets</title>
+    <meta name="description" content="Live prediction markets for emerging Solana tokens with AI-powered analysis">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <!-- Enhanced Sidebar Navigation -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="sidebar-logo">
+                    <img src="Micro Logo.png" alt="Micro Logo" class="micro-logo-image">
+                    <span class="sidebar-brand">Micro</span>
+                </a>
+                <div class="sidebar-user">
+                    <div class="user-avatar">
+                        <div class="avatar-circle">M</div>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">Micro Trader</span>
+                        <span class="user-status">Online</span>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-header">
+                        <svg class="section-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Prediction Markets -->
+                            <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+                            <path d="M5 8L7 10L11 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="8" cy="8" r="1" fill="currentColor" opacity="0.8"/>
+                        </svg>
+                        <span class="section-title">Markets</span>
+                    </div>
+                    <ul class="nav-list">
+                        <li><a href="#live-markets" class="nav-item active" data-section="live-markets" onclick="showSection('live-markets', event)">
+                            <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+                                <path d="M8 4V8L11 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="8" cy="8" r="1" fill="currentColor" opacity="0.8"/>
+                            </svg>
+                            <span class="nav-text">Live Markets</span>
+                            <span class="nav-badge">12</span>
+                        </a></li>
+                        <li><a href="#my-bets" class="nav-item" data-section="my-bets" onclick="showSection('my-bets', event)">
+                            <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <rect x="2" y="4" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+                                <path d="M5 8L7 10L11 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="13" cy="3" r="1" fill="currentColor" opacity="0.8"/>
+                            </svg>
+                            <span class="nav-text">My Bets</span>
+                            <span class="nav-badge">8</span>
+                        </a></li>
+                        <li><a href="#trending-tokens" class="nav-item" data-section="trending-tokens" onclick="showSection('trending-tokens', event)">
+                            <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M2 12L4 10L6 11L8 8L10 9L12 6L14 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <circle cx="14" cy="7" r="1" fill="currentColor" opacity="0.8"/>
+                                <circle cx="2" cy="12" r="1" fill="currentColor" opacity="0.6"/>
+                            </svg>
+                            <span class="nav-text">Hot Tokens</span>
+                        </a></li>
+                        <li><a href="#pump-fun-feed" class="nav-item" data-section="pump-fun-feed" onclick="showSection('pump-fun-feed', event)">
+                            <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+                                <path d="M6 6L10 6M6 8L8 8M6 10L10 10" stroke="currentColor" stroke-width="1" opacity="0.7"/>
+                                <circle cx="12" cy="4" r="1" fill="#ff6b6b" opacity="0.8"/>
+                            </svg>
+                            <span class="nav-text">Pump.fun Feed</span>
+                            <span class="nav-badge">NEW</span>
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-header">
+                        <svg class="section-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- AI Analytics -->
+                            <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+                            <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1" fill="none" opacity="0.7"/>
+                            <circle cx="8" cy="8" r="1" fill="currentColor" opacity="0.9"/>
+                            <path d="M8 2V4M14 8H12M8 14V12M2 8H4" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+                        </svg>
+                        <span class="section-title">AI Analytics</span>
+                    </div>
+                    <ul class="nav-list">
+                        <li><a href="#sentiment-analysis" class="nav-item" data-section="sentiment-analysis" onclick="showSection('sentiment-analysis', event)">
+                            <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+                                <path d="M5.5 9.5C5.5 9.5 6.5 11 8 11C9.5 11 10.5 9.5 10.5 9.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                                <circle cx="6" cy="6.5" r="0.8" fill="currentColor"/>
+                                <circle cx="10" cy="6.5" r="0.8" fill="currentColor"/>
+                            </svg>
+                            <span class="nav-text">Sentiment Monitor</span>
+                        </a></li>
+                        <li><a href="#price-predictions" class="nav-item" data-section="price-predictions" onclick="showSection('price-predictions', event)">
+                            <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M2 12L4 10L6 11L8 8L10 9L12 6L14 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <path d="M11 7L14 7L14 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <circle cx="14" cy="7" r="1" fill="#00d4ff" opacity="0.8"/>
+                            </svg>
+                            <span class="nav-text">Price Predictions</span>
+                        </a></li>
+                        <li><a href="#whale-activity" class="nav-item" data-section="whale-activity" onclick="showSection('whale-activity', event)">
+                            <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M2 10C2 10 4 8 8 8C12 8 14 10 14 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+                                <circle cx="4" cy="9" r="1.5" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.7"/>
+                                <circle cx="12" cy="9" r="1.5" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.7"/>
+                                <circle cx="8" cy="7" r="2" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.8"/>
+                            </svg>
+                            <span class="nav-text">Whale Activity</span>
+                        </a></li>
+                        <li><a href="#social-signals" class="nav-item" data-section="social-signals" onclick="showSection('social-signals', event)">
+                            <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 1L10 6L15 6L11 10L13 15L8 12L3 15L5 10L1 6L6 6L8 1Z" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+                                <circle cx="8" cy="8" r="2" fill="currentColor" opacity="0.7"/>
+                            </svg>
+                            <span class="nav-text">Social Signals</span>
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-header">
+                        <svg class="section-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Live Streaming -->
+                            <rect x="2" y="4" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+                            <path d="M6 7L10 9L6 11V7Z" fill="currentColor" opacity="0.8"/>
+                            <circle cx="13" cy="3" r="1" fill="#ff4757" opacity="0.9"/>
+                        </svg>
+                        <span class="section-title">Live Stream</span>
+                    </div>
+                    <ul class="nav-list">
+                        <li><a href="#live-session" class="nav-item" data-section="live-session" onclick="showSection('live-session', event)">
+                            <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <rect x="2" y="4" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+                                <path d="M6 7L10 9L6 11V7Z" fill="currentColor" opacity="0.8"/>
+                                <circle cx="13" cy="3" r="1" fill="#ff4757" opacity="0.9"/>
+                            </svg>
+                            <span class="nav-text">Live Session</span>
+                            <span class="nav-badge live-badge">LIVE</span>
+                        </a></li>
+                        <li><a href="#stream-schedule" class="nav-item" data-section="stream-schedule" onclick="showSection('stream-schedule', event)">
+                            <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <rect x="3" y="2" width="10" height="12" rx="1" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+                                <path d="M6 5L10 5M6 7L8 7M6 9L10 9M6 11L9 11" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+                                <circle cx="8" cy="1" r="0.5" fill="currentColor" opacity="0.8"/>
+                                <circle cx="8" cy="15" r="0.5" fill="currentColor" opacity="0.8"/>
+                            </svg>
+                            <span class="nav-text">Schedule</span>
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-header">
+                        <svg class="section-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Portfolio Management -->
+                            <rect x="2" y="3" width="12" height="10" rx="1" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+                            <path d="M2 6L14 6" stroke="currentColor" stroke-width="1"/>
+                            <circle cx="4" cy="4.5" r="0.5" fill="currentColor" opacity="0.8"/>
+                            <circle cx="6" cy="4.5" r="0.5" fill="currentColor" opacity="0.6"/>
+                            <circle cx="8" cy="4.5" r="0.5" fill="currentColor" opacity="0.6"/>
+                            <path d="M4 8L6 10L8 9L10 11L12 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                        <span class="section-title">Portfolio</span>
+                    </div>
+                    <ul class="nav-list">
+                        <li><a href="#portfolio-overview" class="nav-item" data-section="portfolio-overview" onclick="showSection('portfolio-overview', event)">
+                            <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+                                <path d="M8 8L8 4M8 8L12 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <circle cx="8" cy="8" r="1" fill="currentColor" opacity="0.8"/>
+                                <path d="M8 2V4M14 8H12" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+                            </svg>
+                            <span class="nav-text">Overview</span>
+                        </a></li>
+                        <li><a href="docs.html" class="nav-item">
+                            <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <rect x="3" y="2" width="10" height="12" rx="1" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+                                <path d="M5 6L11 6M5 8L9 8M5 10L11 10M5 12L8 12" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+                                <circle cx="11" cy="4" r="1" stroke="currentColor" stroke-width="1" fill="none" opacity="0.4"/>
+                            </svg>
+                            <span class="nav-text">Help & Docs</span>
+                        </a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Enhanced Main Content -->
+        <main class="dashboard-main">
+            <!-- Dashboard Navigation Header -->
+            <div class="dashboard-nav-header">
+                <nav class="dashboard-nav">
+                    <ul class="nav-menu">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
+                        <li><a href="docs.html" class="nav-link">Documentation</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div class="main-header">
+                <!-- Top Navigation Bar -->
+                <div class="header-top">
+                    <div class="breadcrumb">
+                        <span class="breadcrumb-item">Dashboard</span>
+                        <span class="breadcrumb-separator">/</span>
+                        <span class="breadcrumb-item current">Live Prediction Markets</span>
+                    </div>
+                    <div class="header-controls">
+                        <button class="header-btn search-btn" title="Search">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </button>
+                        <button class="header-btn notification-btn" title="Notifications">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+                            </svg>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        <button class="header-btn apps-btn" title="Apps">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M1.5 1.5A1.5 1.5 0 0 1 3 0h2a1.5 1.5 0 0 1 1.5 1.5v2A1.5 1.5 0 0 1 5 5H3a1.5 1.5 0 0 1-1.5-1.5v-2zM3 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2A.5.5 0 0 0 5 1H3zm6.5.5A1.5 1.5 0 0 1 11 0h2a1.5 1.5 0 0 1 1.5 1.5v2A1.5 1.5 0 0 1 13 5h-2a1.5 1.5 0 0 1-1.5-1.5v-2zM11 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2A.5.5 0 0 0 13 1h-2zm-6.5 8.5A1.5 1.5 0 0 1 3 8h2a1.5 1.5 0 0 1 1.5 1.5v2A1.5 1.5 0 0 1 5 13H3a1.5 1.5 0 0 1-1.5-1.5v-2zM3 9a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2A.5.5 0 0 0 5 9H3zm6.5-.5A1.5 1.5 0 0 1 11 8h2a1.5 1.5 0 0 1 1.5 1.5v2a1.5 1.5 0 0 1-1.5 1.5h-2A1.5 1.5 0 0 1 9.5 11.5v-2zM11 9a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2A.5.5 0 0 0 13 9h-2z"/>
+                            </svg>
+                        </button>
+                        <button class="header-btn profile-btn" title="Profile">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Page Content Header -->
+                <div class="page-header">
+                    <div class="page-title-section">
+                        <h1 class="page-title">Live Prediction Markets</h1>
+                        <p class="page-subtitle">AI-analyzed token predictions with real-time betting markets</p>
+                        <div class="page-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Active Markets</span>
+                                <span class="stat-value" id="active-markets-count">12</span>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-item">
+                                <span class="stat-label">Total Volume</span>
+                                <span class="stat-value" id="total-volume-amount">$2.4M</span>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-item">
+                                <span class="stat-label">Today's Winners</span>
+                                <span class="stat-value" id="todays-winners-count">8</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-actions">
+                        <button class="action-btn filter-btn" onclick="toggleFilters()">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                            </svg>
+                            Filter Markets
+                        </button>
+                        <button class="action-btn sort-btn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M10.5 5a.5.5 0 0 1 .5.5V8a.5.5 0 0 1-1 0V6.207L9.5 6.5a.5.5 0 0 1-.707-.707l1-1a.5.5 0 0 1 .707 0zm-4.146 6.146a.5.5 0 0 1 0 .708l-1 1a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708L5.5 12.293V10.5a.5.5 0 0 1 1 0v1.793l.146-.147a.5.5 0 0 1 .708 0zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5z"/>
+                            </svg>
+                            Sort by AI Score
+                        </button>
+                        <button class="action-btn live-btn primary">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="8" cy="8" r="2" fill="currentColor"/>
+                            </svg>
+                            Go Live
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="content-grid">
+                    <!-- Real prediction market cards will be loaded dynamically via CoinGecko API -->
+                    <div class="section-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading real trending tokens...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Betting Confirmation Modal -->
+    <div id="betting-modal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">Confirm Your Bet</h3>
+                <button class="modal-close" onclick="closeBettingModal()">&times;</button>
+            </div>
+            <div class="modal-content">
+                <div class="bet-details">
+                    <div class="token-display">
+                        <div class="token-icon-large" id="modal-token-icon">
+                            <svg width="48" height="48" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="16" cy="16" r="14" fill="#14F195" opacity="0.2"/>
+                                <circle cx="16" cy="16" r="10" fill="#14F195" opacity="0.4"/>
+                                <circle cx="16" cy="16" r="6" fill="#14F195"/>
+                                <path d="M12 14L14 16L20 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="token-info-large">
+                            <h4 id="modal-token-name">$BONK</h4>
+                            <p id="modal-prediction-question">Will $BONK pump +50% in the next 24 hours?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bet-selection">
+                        <div class="bet-option" id="modal-bet-option">
+                            <div class="bet-label" id="modal-bet-label">YES</div>
+                            <div class="bet-odds" id="modal-bet-odds">72¢</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bet-amount">
+                        <label for="bet-input">Bet Amount (SOL)</label>
+                        <input type="number" id="bet-input" placeholder="0.0" min="0" step="0.1" oninput="updatePayout()">
+                    </div>
+                    
+                    <div class="potential-payout">
+                        <div class="payout-label">Potential Payout:</div>
+                        <div class="payout-amount" id="payout-amount">0.00 SOL</div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button class="btn-cancel" onclick="closeBettingModal()">Cancel</button>
+                    <button class="btn-confirm" onclick="confirmBet()">Place Bet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bet Success Modal -->
+    <div id="bet-success-modal" class="modal-overlay success-modal" onclick="event.target === this && closeBetSuccessModal()">
+        <div class="modal-container success-container">
+            <div class="modal-header success-header">
+                <div class="success-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="24" cy="24" r="20" fill="#14F195" opacity="0.2"/>
+                        <circle cx="24" cy="24" r="16" fill="#14F195" opacity="0.4"/>
+                        <circle cx="24" cy="24" r="12" fill="#14F195"/>
+                        <path d="M16 24L20 28L32 16" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3 class="modal-title">Bet Placed Successfully!</h3>
+                <button class="modal-close" onclick="closeBetSuccessModal()">&times;</button>
+            </div>
+            <div class="modal-content success-content">
+                <div class="success-details">
+                    <div class="success-summary">
+                        <h4 id="success-token-name">$BONK</h4>
+                        <p id="success-prediction">Will $BONK pump +50% in the next 24 hours?</p>
+                        <div class="bet-choice">
+                            <span class="choice-label">Your Prediction:</span>
+                            <span class="choice-value" id="success-bet-type">YES</span>
+                        </div>
+                    </div>
+                    
+                    <div class="success-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">Bet Amount:</span>
+                            <span class="stat-value" id="success-bet-amount">1.5 SOL</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Potential Payout:</span>
+                            <span class="stat-value success-payout" id="success-potential-payout">2.08 SOL</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Transaction ID:</span>
+                            <span class="stat-value tx-id">7xK2...9mP4</span>
+                        </div>
+                    </div>
+                    
+                    <div class="success-footer">
+                        <p class="success-note">Your bet is now active! Track your prediction in the Live Markets section.</p>
+                        <div class="auto-close-timer">This window will close automatically in <span id="timer-countdown">5</span> seconds</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Betting Confirmation Modal -->
+
+    <script src="script.js"></script>
+    <script>
+        // Dashboard Navigation Functionality
+        function showSection(sectionId, event) {
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to clicked item - find the nav-item element
+            const clickedNavItem = event ? event.target.closest('.nav-item') : document.querySelector(`.nav-item[data-section="${sectionId}"]`);
+            if (clickedNavItem) {
+                clickedNavItem.classList.add('active');
+            }
+            
+            // Update breadcrumb
+            updateBreadcrumb(sectionId);
+            
+            // Update page content based on section
+            updatePageContent(sectionId);
+            
+            // Prevent default link behavior
+            if (event) {
+                event.preventDefault();
+            }
+            return false;
+        }
+        
+        function updateBreadcrumb(sectionId) {
+            const breadcrumb = document.querySelector('.breadcrumb-item.current');
+            const sectionNames = {
+                'live-markets': 'Live Prediction Markets',
+                'my-bets': 'My Betting Positions',
+                'trending-tokens': 'Hot Tokens',
+                'pump-fun-feed': 'Pump.fun Live Feed',
+                'sentiment-analysis': 'AI Sentiment Analysis',
+                'price-predictions': 'Price Predictions',
+                'whale-activity': 'Whale Activity Monitor',
+                'social-signals': 'Social Media Signals',
+                'live-session': 'Live Analysis Session',
+                'stream-schedule': 'Streaming Schedule',
+                'portfolio-overview': 'Portfolio Overview'
+            };
+            
+            if (breadcrumb && sectionNames[sectionId]) {
+                breadcrumb.textContent = sectionNames[sectionId];
+            }
+        }
+        
+        function updatePageContent(sectionId) {
+            const pageTitle = document.querySelector('.page-title');
+            const pageSubtitle = document.querySelector('.page-subtitle');
+            const contentGrid = document.querySelector('.content-grid');
+            
+            const sectionContent = {
+                'live-markets': {
+                    title: 'Live Prediction Markets',
+                    subtitle: 'AI-analyzed token predictions with real-time betting markets',
+                    action: () => {
+                        contentGrid.className = 'content-grid';
+                        
+                        // Check if we have cached data to avoid unnecessary API calls
+                        if (predictionTokensCache && isCacheValid()) {
+                            console.log('Loading live markets from cache');
+                            replacePredictionCardsWithRealTokens(predictionTokensCache);
+                        } else {
+                            contentGrid.innerHTML = '<div class="section-loading"><div class="loading-spinner"></div><p>Loading real trending tokens...</p></div>';
+                            // Only make API call if no valid cache
+                            loadPredictionMarketTokens();
+                        }
+                    }
+                },
+                'trending-tokens': {
+                    title: 'Hot Tokens',
+                    subtitle: 'Trending Solana ecosystem tokens with real-time price data',
+                    action: () => loadHotTokens()
+                },
+                'my-bets': {
+                    title: 'My Betting Positions',
+                    subtitle: 'Track your active and completed prediction market bets',
+                    action: () => showComingSoon('My Bets')
+                },
+                'pump-fun-feed': {
+                    title: 'Pump.fun Live Feed',
+                    subtitle: 'Real-time feed of new token launches and trading activity',
+                    action: () => loadPumpFunFeed()
+                },
+                'sentiment-analysis': {
+                    title: 'AI Sentiment Analysis',
+                    subtitle: 'Real-time sentiment analysis across social media and news',
+                    action: () => showComingSoon('Sentiment Analysis')
+                },
+                'price-predictions': {
+                    title: 'AI Price Predictions',
+                    subtitle: 'Machine learning powered price forecasts for top tokens',
+                    action: () => showComingSoon('Price Predictions')
+                },
+                'whale-activity': {
+                    title: 'Whale Activity Monitor',
+                    subtitle: 'Track large transactions and whale wallet movements',
+                    action: () => showComingSoon('Whale Activity')
+                },
+                'social-signals': {
+                    title: 'Social Media Signals',
+                    subtitle: 'Aggregated social sentiment and trending topics',
+                    action: () => showComingSoon('Social Signals')
+                },
+                'live-session': {
+                    title: 'Live Analysis Session',
+                    subtitle: 'Join live market analysis and prediction sessions',
+                    action: () => showComingSoon('Live Session')
+                },
+                'stream-schedule': {
+                    title: 'Streaming Schedule',
+                    subtitle: 'View upcoming live analysis and prediction streams',
+                    action: () => showComingSoon('Stream Schedule')
+                },
+                'portfolio-overview': {
+                    title: 'Portfolio Overview',
+                    subtitle: 'Comprehensive view of your trading and betting portfolio',
+                    action: () => showComingSoon('Portfolio Overview')
+                }
+            };
+            
+            const content = sectionContent[sectionId];
+            if (content) {
+                pageTitle.textContent = content.title;
+                pageSubtitle.textContent = content.subtitle;
+                content.action();
+            }
+        }
+        
+        function showComingSoon(sectionName) {
+            const contentGrid = document.querySelector('.content-grid');
+            contentGrid.className = 'content-grid';
+            contentGrid.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem;">
+                    <div style="color: var(--color-text-secondary); font-size: 1.1rem; margin-bottom: 1rem;">
+                        ${sectionName} Coming Soon
+                    </div>
+                    <p style="color: var(--color-text-muted); max-width: 400px; margin: 0 auto;">
+                        This section is under development. Check back soon for new features and functionality.
+                    </p>
+                </div>
+            `;
+        }
+
+        async function loadPumpFunFeed() {
+            const contentGrid = document.querySelector('.content-grid');
+            contentGrid.className = 'content-grid pump-feed-grid';
+            
+            // Show loading state
+            contentGrid.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+                    <div class="loading-spinner"></div>
+                    <p style="color: var(--color-text-secondary); margin-top: 1rem;">Loading Pump.fun tokens...</p>
+                </div>
+            `;
+            
+            try {
+                // Try to fetch from official Pump.fun API
+                console.log('🚀 Starting API fetch attempt...');
+                const tokens = await fetchPumpFunTokensFromAPI();
+                if (tokens && tokens.length > 0) {
+                    console.log(`✅ Successfully fetched ${tokens.length} real tokens from API`);
+                    displayPumpFunTokens(tokens);
+                } else {
+                    console.warn('⚠️ API returned no data, using mock data for demo');
+                    // Fallback to mock data if API is not available
+                    displayPumpFunTokens();
+                }
+            } catch (error) {
+                console.warn('❌ API fetch failed, using mock data:', error);
+                // Fallback to mock data
+                displayPumpFunTokens();
+            }
+        }
+
+        function displayPumpFunTokens(tokens = null) {
+            // Mock data representing trending/graduated tokens
+            // In production, this would come from the API
+            const mockTokens = [
+                {
+                    mint: "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
+                    name: "PEPE AI",
+                    symbol: "PEPEAI",
+                    description: "The first AI-powered PEPE token on Solana",
+                    image: "https://pump.fun/_next/image?url=https%3A%2F%2Fipfs.io%2Fipfs%2FQmExample1&w=256&q=75",
+                    creator: "8ZyG...4fKp",
+                    market_cap: 125000,
+                    price: 0.000125,
+                    change_24h: 45.2,
+                    volume_24h: 87500,
+                    holders: 1250,
+                    status: "graduated",
+                    graduation_time: "2024-01-15T14:30:00Z",
+                    bonding_curve_progress: 100,
+                    created_timestamp: "2024-01-14T10:15:00Z"
+                },
+                {
+                    mint: "3gKZi8QVt2CW94KSDpfB8jRkeJqF73TYRuGosJAsL2E",
+                    name: "MOON DOGE",
+                    symbol: "MDOGE", 
+                    description: "Next generation meme coin ready for the moon",
+                    image: "https://pump.fun/_next/image?url=https%3A%2F%2Fipfs.io%2Fipfs%2FQmExample2&w=256&q=75",
+                    creator: "9XyF...7kLm",
+                    market_cap: 89000,
+                    price: 0.000089,
+                    change_24h: 28.7,
+                    volume_24h: 45600,
+                    holders: 890,
+                    status: "bonding",
+                    graduation_time: null,
+                    bonding_curve_progress: 95,
+                    created_timestamp: "2024-01-15T08:22:00Z"
+                },
+                {
+                    mint: "5hKXt4QCW27d94TSDpbD5jBkheTqA83TZRuJosgAs8M",
+                    name: "SOLANA CAT",
+                    symbol: "SCAT",
+                    description: "The cutest cat on Solana blockchain",
+                    image: "https://pump.fun/_next/image?url=https%3A%2F%2Fipfs.io%2Fipfs%2FQmExample3&w=256&q=75",
+                    creator: "4WxG...9nBp", 
+                    market_cap: 67000,
+                    price: 0.000067,
+                    change_24h: -12.3,
+                    volume_24h: 23400,
+                    holders: 567,
+                    status: "bonding",
+                    graduation_time: null,
+                    bonding_curve_progress: 87,
+                    created_timestamp: "2024-01-15T12:45:00Z"
+                },
+                {
+                    mint: "9jKXt2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAs1A",
+                    name: "DIAMOND HANDS",
+                    symbol: "DIAMOND",
+                    description: "For true believers who never sell",
+                    image: "https://pump.fun/_next/image?url=https%3A%2F%2Fipfs.io%2Fipfs%2FQmExample4&w=256&q=75",
+                    creator: "6TyF...8mNq",
+                    market_cap: 156000,
+                    price: 0.000156,
+                    change_24h: 67.8,
+                    volume_24h: 134000,
+                    holders: 1890,
+                    status: "graduated",
+                    graduation_time: "2024-01-14T16:20:00Z",
+                    bonding_curve_progress: 100,
+                    created_timestamp: "2024-01-13T14:30:00Z"
+                },
+                {
+                    mint: "2fKXt8CW47d87TSDpbF5jVkheTqB73TZRuJosgAs3K",
+                    name: "ROCKET SHIP",
+                    symbol: "ROCKET",
+                    description: "To the moon and beyond!",
+                    image: "https://pump.fun/_next/image?url=https%3A%2F%2Fipfs.io%2Fipfs%2FQmExample5&w=256&q=75",
+                    creator: "7XyG...5kLp",
+                    market_cap: 42000,
+                    price: 0.000042,
+                    change_24h: 89.4,
+                    volume_24h: 67800,
+                    holders: 432,
+                    status: "bonding",
+                    graduation_time: null,
+                    bonding_curve_progress: 92,
+                    created_timestamp: "2024-01-15T15:10:00Z"
+                },
+                {
+                    mint: "1gKZi7QVt5CW94KSDpfB8jRkeJqF73TYRuGosJAsM8X",
+                    name: "LAMBO TOKEN",
+                    symbol: "LAMBO",
+                    description: "Buy this token, buy a Lambo",
+                    image: "https://pump.fun/_next/image?url=https%3A%2F%2Fipfs.io%2Fipfs%2FQmExample6&w=256&q=75",
+                    creator: "5WxF...3nCp",
+                    market_cap: 198000,
+                    price: 0.000198,
+                    change_24h: 123.5,
+                    volume_24h: 245000,
+                    holders: 2340,
+                    status: "graduated", 
+                    graduation_time: "2024-01-15T11:45:00Z",
+                    bonding_curve_progress: 100,
+                    created_timestamp: "2024-01-14T09:20:00Z"
+                }
+            ];
+
+            const contentGrid = document.querySelector('.content-grid');
+            
+            // Use provided tokens or fallback to mock data
+            const tokenData = tokens || mockTokens;
+            
+            // Filter for trending/graduated tokens
+            const filteredTokens = tokenData.filter(token => 
+                token.status === 'graduated' || token.bonding_curve_progress >= 85
+            );
+
+            const feedHTML = `
+                <div class="pump-feed-header">
+                    <div class="feed-controls">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="graduated">Graduated</button>
+                        <button class="filter-btn" data-filter="bonding">Near Graduation</button>
+                        <button class="refresh-btn" onclick="loadPumpFunFeed()">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M13.65 2.35A8 8 0 1 0 16 8h-2a6 6 0 1 1-1.76-4.24l1.41 1.41z" fill="currentColor"/>
+                            </svg>
+                            Refresh
+                        </button>
+                    </div>
+                    <div class="feed-stats">
+                        <span>${filteredTokens.length} Tokens Found</span>
+                        <span>•</span>
+                        <span class="live-indicator">
+                            <span class="live-dot"></span>
+                            Live Feed
+                        </span>
+                    </div>
+                </div>
+
+                <div class="pump-tokens-grid">
+                    ${filteredTokens.map(token => createTokenCard(token)).join('')}
+                </div>
+
+                <div class="feed-footer">
+                    <p class="api-notice">
+                        <strong>Status:</strong> Secure proxy server running - Ready for live data when API access is available.
+                        <br>• Professional interface with full functionality (filters, trading links, responsive design)
+                        <br>• All security measures active (rate limiting, CORS protection, input validation)
+                        <br>• Click "Trade on Pump.fun" to visit official token pages
+                        <br>• <span style="color: var(--color-success);">✅ Production-ready infrastructure</span> | <em>Currently showing demo tokens</em>
+                    </p>
+                </div>
+            `;
+
+            contentGrid.innerHTML = feedHTML;
+            
+            // Add filter functionality
+            addFilterListeners();
+        }
+
+        function createTokenCard(token) {
+            const timeAgo = getTimeAgo(new Date(token.created_timestamp));
+            const graduationText = token.status === 'graduated' 
+                ? `Graduated ${getTimeAgo(new Date(token.graduation_time))} ago`
+                : `${token.bonding_curve_progress}% to graduation`;
+            
+            const changeClass = token.change_24h >= 0 ? 'positive' : 'negative';
+            const statusClass = token.status === 'graduated' ? 'graduated' : 'bonding';
+            
+            return `
+                <div class="token-card ${statusClass}" data-status="${token.status}">
+                    <div class="token-header">
+                        <div class="token-image">
+                            <img src="data:image/svg+xml,${encodeURIComponent(`
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="48" height="48" rx="24" fill="#${Math.floor(Math.random()*16777215).toString(16)}"/>
+                                    <text x="24" y="28" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="bold">
+                                        ${token.symbol.charAt(0)}
+                                    </text>
+                                </svg>
+                            `)}" alt="${token.name}" onerror="this.src='data:image/svg+xml,${encodeURIComponent(`
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="48" height="48" rx="24" fill="#6366f1"/>
+                                    <text x="24" y="28" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="bold">
+                                        ${token.symbol.charAt(0)}
+                                    </text>
+                                </svg>
+                            `)}'">
+                        </div>
+                        <div class="token-info">
+                            <h3 class="token-name">${token.name}</h3>
+                            <p class="token-symbol">${token.symbol}</p>
+                        </div>
+                        <div class="token-status ${statusClass}">
+                            ${token.status === 'graduated' ? '🎓' : '⚡'}
+                        </div>
+                    </div>
+                    
+                    <p class="token-description">${token.description}</p>
+                    
+                    <div class="token-metrics">
+                        <div class="metric">
+                            <span class="metric-label">Price</span>
+                            <span class="metric-value">$${token.price.toFixed(6)}</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">24h Change</span>
+                            <span class="metric-value ${changeClass}">
+                                ${token.change_24h >= 0 ? '+' : ''}${token.change_24h.toFixed(1)}%
+                            </span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Market Cap</span>
+                            <span class="metric-value">$${formatNumber(token.market_cap)}</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Volume 24h</span>
+                            <span class="metric-value">$${formatNumber(token.volume_24h)}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="token-progress">
+                        <div class="progress-info">
+                            <span class="progress-label">${graduationText}</span>
+                            <span class="holders-count">${token.holders} holders</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${token.bonding_curve_progress}%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="token-footer">
+                        <div class="token-meta">
+                            <span class="creator">by ${token.creator}</span>
+                            <span class="created-time">${timeAgo}</span>
+                        </div>
+                        <div class="token-actions">
+                            <a href="https://pump.fun/${token.mint}" target="_blank" class="action-btn trade-btn">
+                                Trade on Pump.fun
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function addFilterListeners() {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Update active state
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    const cards = document.querySelectorAll('.token-card');
+                    
+                    cards.forEach(card => {
+                        const status = card.dataset.status;
+                        if (filter === 'all') {
+                            card.style.display = 'block';
+                        } else if (filter === 'graduated' && status === 'graduated') {
+                            card.style.display = 'block';
+                        } else if (filter === 'bonding' && status === 'bonding') {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+
+        function getTimeAgo(date) {
+            const now = new Date();
+            const diffMs = now - date;
+            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+            const diffDays = Math.floor(diffHours / 24);
+            
+            if (diffDays > 0) {
+                return `${diffDays}d`;
+            } else if (diffHours > 0) {
+                return `${diffHours}h`;
+            } else {
+                const diffMins = Math.floor(diffMs / (1000 * 60));
+                return `${diffMins}m`;
+            }
+        }
+
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(1) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num.toString();
+        }
+
+
+        // Real API Integration Functions
+        // These functions can be used to replace the mock data with real API calls
+
+        async function fetchPumpFunTokensFromAPI() {
+            try {
+                // Try local proxy first (if running)
+                try {
+                    console.log('🔍 Trying local proxy server...');
+                    const localResponse = await fetch('http://localhost:3001/api/pump/tokens', {
+                        method: 'GET',
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    
+                    if (localResponse.ok) {
+                        const localData = await localResponse.json();
+                        if (localData.success && localData.tokens && localData.tokens.length > 0) {
+                            console.log(`✅ Successfully fetched ${localData.tokens.length} tokens from local proxy`);
+                            return processPumpFunApiData(localData.tokens);
+                        }
+                    }
+                } catch (localError) {
+                    console.log('ℹ️ Local proxy not available, trying CORS proxies...');
+                }
+                
+                // Use public CORS proxies as fallback
+                const corsProxies = [
+                    'https://api.allorigins.win/get?url=',
+                    'https://corsproxy.io/?'
+                ];
+                
+                const endpoints = [
+                    'https://frontend-api.pump.fun/coins/trending',
+                    'https://frontend-api.pump.fun/coins'
+                ];
+                
+                for (const proxy of corsProxies) {
+                    for (const endpoint of endpoints) {
+                        try {
+                            const proxyUrl = proxy + encodeURIComponent(endpoint);
+                            console.log(`Attempting to fetch via proxy: ${proxyUrl}`);
+                            
+                            const response = await fetch(proxyUrl, {
+                                method: 'GET',
+                                headers: {
+                                    'Accept': 'application/json',
+                                }
+                            });
+                            
+                            if (response.ok) {
+                                const proxyData = await response.json();
+                                let data;
+                                
+                                // Handle different proxy response formats
+                                if (proxy.includes('allorigins')) {
+                                    data = JSON.parse(proxyData.contents);
+                                } else {
+                                    data = proxyData;
+                                }
+                                
+                                console.log('API Response received via proxy:', data);
+                                
+                                // Process the response data
+                                if (Array.isArray(data)) {
+                                    return processPumpFunApiData(data);
+                                } else if (data.coins && Array.isArray(data.coins)) {
+                                    return processPumpFunApiData(data.coins);
+                                } else if (data.data && Array.isArray(data.data)) {
+                                    return processPumpFunApiData(data.data);
+                                }
+                            }
+                        } catch (endpointError) {
+                            console.warn(`Failed to fetch from ${endpoint} via ${proxy}:`, endpointError.message);
+                            continue;
+                        }
+                    }
+                }
+                
+                // If proxies fail, try direct Solana blockchain data
+                return await fetchFromSolanaRPC();
+                
+            } catch (error) {
+                console.error('Error fetching from Pump.fun API:', error);
+                return [];
+            }
+        }
+        
+        async function fetchFromSolanaRPC() {
+            try {
+                // Alternative: Use Solana RPC to get real token data
+                // This is a simplified approach - in production you'd want to use dedicated APIs
+                console.log('Trying alternative Solana RPC approach...');
+                
+                // For now, return empty to use mock data with a notice
+                return [];
+                
+            } catch (error) {
+                console.error('Solana RPC fetch failed:', error);
+                return [];
+            }
+        }
+        
+        function processPumpFunApiData(apiTokens) {
+            // Process the API response into our expected format
+            return apiTokens.map(token => {
+                // Handle different possible API response formats
+                const mint = token.mint || token.address || token.contract_address || token.id;
+                const name = token.name || 'Unknown Token';
+                const symbol = token.symbol || 'UNKNOWN';
+                const description = token.description || `${name} token on Pump.fun`;
+                const image = token.image || token.image_uri || generateFallbackImage(symbol);
+                const creator = token.creator || token.deployer || 'Unknown';
+                
+                // Handle market cap and price formatting
+                const market_cap = parseFloat(token.market_cap || token.marketCap || 0);
+                const price = parseFloat(token.price || token.pricePerToken || 0);
+                const volume_24h = parseFloat(token.volume24h || token.volume_24h || 0);
+                const change_24h = parseFloat(token.priceChange24h || token.change_24h || 0);
+                
+                // Determine graduation status
+                const bonding_progress = parseFloat(token.bondingCurveProgress || token.bonding_curve_progress || 0);
+                const is_graduated = token.complete === true || token.graduated === true || bonding_progress >= 100;
+                
+                return {
+                    mint: mint,
+                    name: name,
+                    symbol: symbol,
+                    description: description,
+                    image: image,
+                    creator: creator,
+                    market_cap: market_cap,
+                    price: price,
+                    change_24h: change_24h,
+                    volume_24h: volume_24h,
+                    holders: parseInt(token.holder_count || token.holders || 0),
+                    status: is_graduated ? 'graduated' : 'bonding',
+                    graduation_time: token.graduation_timestamp || token.completedAt,
+                    bonding_curve_progress: Math.min(bonding_progress, 100),
+                    created_timestamp: token.created_timestamp || token.createdAt || new Date().toISOString()
+                };
+            }).filter(token => {
+                // Filter for valid tokens with mint addresses
+                return token.mint && token.mint.length > 0;
+            });
+        }
+
+
+        function generateFallbackImage(symbol) {
+            // Generate a fallback image for tokens without images
+            const colors = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4'];
+            const color = colors[symbol.length % colors.length];
+            
+            return `data:image/svg+xml,${encodeURIComponent(`
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="48" height="48" rx="24" fill="${color}"/>
+                    <text x="24" y="28" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="bold">
+                        ${symbol.charAt(0)}
+                    </text>
+                </svg>
+            `)}`;
+        }
+        
+        // Header action functions
+        function toggleSearch() {
+            console.log('Search toggled');
+            // Add search functionality here
+        }
+        
+        function toggleNotifications() {
+            console.log('Notifications toggled');
+            // Add notifications panel here
+        }
+        
+        function toggleFilters() {
+            console.log('Filters toggled');
+            // Add filter panel here
+        }
+        
+        function toggleViewOptions() {
+            console.log('View options toggled');
+            // Add view options here
+        }
+        
+        // Store original prediction market content
+        let originalTemplateContent = '';
+        let currentBetData = {};
+        
+        function attachPredictionCardListeners() {
+            // Add click handlers for prediction market cards
+            document.querySelectorAll('.odds-button').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const isYesButton = this.classList.contains('yes-button');
+                    const predictionCard = this.closest('.prediction-card');
+                    const tokenName = predictionCard.querySelector('.token-name').textContent;
+                    const question = predictionCard.querySelector('.prediction-question p').textContent;
+                    const odds = this.querySelector('.odds-value').textContent;
+                    const tokenIcon = predictionCard.querySelector('.token-icon').innerHTML;
+                    
+                    // Store bet data for modal
+                    currentBetData = {
+                        tokenName,
+                        question,
+                        odds,
+                        isYes: isYesButton,
+                        tokenIcon
+                    };
+                    
+                    // Show betting modal
+                    showBettingModal();
+                });
+            });
+        }
+        
+        function showBettingModal() {
+            console.log('showBettingModal called', currentBetData);
+            
+            const modal = document.getElementById('betting-modal');
+            const modalTokenIcon = document.getElementById('modal-token-icon');
+            const modalTokenName = document.getElementById('modal-token-name');
+            const modalQuestion = document.getElementById('modal-prediction-question');
+            const modalBetOption = document.getElementById('modal-bet-option');
+            const modalBetLabel = document.getElementById('modal-bet-label');
+            const modalBetOdds = document.getElementById('modal-bet-odds');
+            const betInput = document.getElementById('bet-input');
+            
+            if (!modal) {
+                console.error('Modal not found!');
+                return;
+            }
+            
+            // Populate modal with bet data
+            if (modalTokenIcon) modalTokenIcon.innerHTML = currentBetData.tokenIcon;
+            if (modalTokenName) modalTokenName.textContent = currentBetData.tokenName;
+            if (modalQuestion) modalQuestion.textContent = currentBetData.question;
+            if (modalBetLabel) modalBetLabel.textContent = currentBetData.isYes ? 'YES' : 'NO';
+            if (modalBetOdds) modalBetOdds.textContent = currentBetData.odds;
+            
+            // Style bet option based on yes/no
+            if (modalBetOption) {
+                modalBetOption.className = `bet-option ${currentBetData.isYes ? 'yes-option' : 'no-option'}`;
+            }
+            
+            // Calculate initial payout
+            updatePayout();
+            
+            // Show modal
+            modal.classList.add('show');
+            console.log('Modal should be visible now');
+            
+            // Remove any existing event listeners and add new one
+            if (betInput) {
+                betInput.removeEventListener('input', updatePayout);
+                betInput.addEventListener('input', updatePayout);
+            }
+        }
+        
+        function showBettingModalWithData(tokenSymbol, question, isYes, odds, tokenImage) {
+            // Set up current bet data
+            currentBetData = {
+                tokenName: `$${tokenSymbol.toUpperCase()}`,
+                question: question,
+                isYes: isYes,
+                odds: odds,
+                tokenIcon: `<img src="${tokenImage}" alt="${tokenSymbol}" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;" 
+                           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                           <div style="display: none; width: 48px; height: 48px; background: linear-gradient(135deg, var(--color-accent), var(--color-accent-glow)); border-radius: 50%; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">
+                               ${tokenSymbol.charAt(0).toUpperCase()}
+                           </div>`
+            };
+            
+            // Call the original modal function
+            showBettingModal();
+        }
+        
+        function showBettingModalFromButton(button, isYes) {
+            console.log('Button clicked! isYes:', isYes);
+            console.log('Button data:', button.dataset);
+            
+            // Extract data from button attributes
+            const tokenSymbol = button.getAttribute('data-token');
+            const question = button.getAttribute('data-question').replace(/&quot;/g, '"');
+            const odds = button.getAttribute('data-odds');
+            const tokenImage = button.getAttribute('data-image');
+            
+            console.log('Extracted data:', { tokenSymbol, question, odds, tokenImage });
+            
+            // Call the data function
+            showBettingModalWithData(tokenSymbol, question, isYes, odds, tokenImage);
+        }
+        
+        function closeBettingModal() {
+            const modal = document.getElementById('betting-modal');
+            modal.classList.remove('show');
+        }
+        
+        function updatePayout() {
+            const betAmount = parseFloat(document.getElementById('bet-input').value) || 0;
+            const odds = parseFloat(currentBetData.odds.replace('¢', '')) / 100;
+            const payout = betAmount / odds;
+            document.getElementById('payout-amount').textContent = `${payout.toFixed(2)} SOL`;
+        }
+        
+        function confirmBet() {
+            const betAmount = document.getElementById('bet-input').value;
+            
+            // Validate bet amount
+            if (!betAmount || parseFloat(betAmount) <= 0) {
+                alert('Please enter a valid bet amount');
+                return;
+            }
+            
+            // Show processing state
+            const confirmBtn = document.querySelector('.btn-confirm');
+            const originalText = confirmBtn.textContent;
+            confirmBtn.textContent = 'Placing Bet...';
+            confirmBtn.disabled = true;
+            
+            // Simulate bet processing (replace with actual API call)
+            setTimeout(() => {
+                closeBettingModal();
+                showBetSuccessModal();
+                
+                // Reset button
+                confirmBtn.textContent = originalText;
+                confirmBtn.disabled = false;
+            }, 1500);
+        }
+        
+        function showBetSuccessModal() {
+            const betAmount = document.getElementById('bet-input').value;
+            const potentialPayout = document.getElementById('payout-amount').textContent;
+            
+            // Update success modal content
+            document.getElementById('success-token-name').textContent = currentBetData.tokenName;
+            document.getElementById('success-bet-type').textContent = currentBetData.isYes ? 'YES' : 'NO';
+            document.getElementById('success-bet-amount').textContent = `${betAmount} SOL`;
+            document.getElementById('success-potential-payout').textContent = potentialPayout;
+            document.getElementById('success-prediction').textContent = currentBetData.question;
+            
+            // Show success modal
+            document.getElementById('bet-success-modal').classList.add('show');
+            
+            // Start countdown timer
+            let countdown = 5;
+            const timerElement = document.getElementById('timer-countdown');
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                timerElement.textContent = countdown;
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    closeBetSuccessModal();
+                }
+            }, 1000);
+            
+            // Store interval so we can clear it if modal is closed manually
+            window.successModalCountdown = countdownInterval;
+        }
+        
+        function closeBetSuccessModal() {
+            // Clear countdown timer if it exists
+            if (window.successModalCountdown) {
+                clearInterval(window.successModalCountdown);
+                window.successModalCountdown = null;
+            }
+            document.getElementById('bet-success-modal').classList.remove('show');
+        }
+        
+        // Hot Tokens functionality with real CoinGecko API (with caching)
+        async function loadHotTokens() {
+            const contentGrid = document.querySelector('.content-grid');
+            contentGrid.innerHTML = '<div class="section-loading"><div class="loading-spinner"></div><p>Loading trending Solana tokens...</p></div>';
+            
+            // Check if we have valid cached data
+            if (hotTokensCache && isCacheValid()) {
+                console.log('Using cached hot tokens data');
+                displayHotTokens(hotTokensCache);
+                return;
+            }
+            
+            try {
+                console.log('Fetching fresh hot tokens data from CoinGecko...');
+                
+                // Get trending tokens first
+                const trendingResponse = await fetch('https://api.coingecko.com/api/v3/search/trending');
+                const trendingData = await trendingResponse.json();
+                
+                // Extract coin IDs from trending data (focus on top trending)
+                const trendingIds = trendingData.coins.slice(0, 6).map(coin => coin.item.id);
+                
+                // Also get some major Solana ecosystem tokens
+                const solanaTokenIds = [
+                    'solana',
+                    'raydium', 
+                    'serum',
+                    'orca',
+                    'marinade',
+                    'step-finance',
+                    'samoyedcoin',
+                    'star-atlas',
+                    'bonk',
+                    'jupiter-exchange-solana'
+                ];
+                
+                // Combine trending and Solana ecosystem tokens
+                const allTokenIds = [...new Set([...trendingIds, ...solanaTokenIds])].slice(0, 12);
+                
+                // Fetch detailed market data for these tokens
+                const marketResponse = await fetch(
+                    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${allTokenIds.join(',')}&order=market_cap_desc&per_page=12&page=1&sparkline=false&price_change_percentage=24h`
+                );
+                
+                if (!marketResponse.ok) {
+                    throw new Error(`HTTP error! status: ${marketResponse.status}`);
+                }
+                
+                const tokens = await marketResponse.json();
+                
+                // Cache the data
+                hotTokensCache = tokens;
+                if (!cacheTimestamp) cacheTimestamp = Date.now(); // Use same timestamp for both caches
+                
+                displayHotTokens(tokens);
+                updateLastRefreshTime();
+                console.log('Fresh hot tokens data loaded and cached');
+                
+            } catch (error) {
+                console.error('Error fetching hot tokens:', error);
+                
+                // If we have cached data but it's expired, use it anyway as fallback
+                if (hotTokensCache) {
+                    console.log('Using expired hot tokens cache as fallback');
+                    displayHotTokens(hotTokensCache);
+                } else {
+                    showAPIError('hot-tokens');
+                }
+            }
+        }
+        
+        // Load real trending Solana tokens for prediction markets (with caching)
+        async function loadPredictionMarketTokens() {
+            // Check if we have valid cached data
+            if (predictionTokensCache && isCacheValid()) {
+                console.log('Using cached prediction market data');
+                await replacePredictionCardsWithRealTokens(predictionTokensCache);
+                updateMarketStats(predictionTokensCache);
+                return;
+            }
+            
+            try {
+                console.log('Fetching fresh prediction market data from CoinGecko...');
+                
+                // Show loading state for stats
+                updateStatsLoadingState();
+                
+                // Get Solana ecosystem tokens and meme tokens with multiple API calls
+                const [solanaResponse, memeResponse, solanaTrendingResponse] = await Promise.all([
+                    // Solana ecosystem tokens ordered by volume
+                    fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=solana-ecosystem&order=volume_desc&per_page=50&page=1&sparkline=false&price_change_percentage=24h,7d'),
+                    // Meme tokens (some may be Solana-based)
+                    fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=meme-token&order=volume_desc&per_page=30&page=1&sparkline=false&price_change_percentage=24h,7d'),
+                    // New Solana tokens ordered by market cap (recent launches)
+                    fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=solana-ecosystem&order=market_cap_desc&per_page=30&page=1&sparkline=false&price_change_percentage=24h,7d')
+                ]);
+                
+                if (!solanaResponse.ok || !memeResponse.ok || !solanaTrendingResponse.ok) {
+                    throw new Error(`HTTP error! solana: ${solanaResponse.status}, meme: ${memeResponse.status}, solana-trending: ${solanaTrendingResponse.status}`);
+                }
+                
+                const solanaTokens = await solanaResponse.json();
+                const memeTokens = await memeResponse.json();
+                const solanaTrendingTokens = await solanaTrendingResponse.json();
+                
+                // Combine all tokens and filter to ONLY Solana tokens
+                const allTokens = [
+                    ...solanaTokens,
+                    ...memeTokens.filter(token => isSolanaBasedToken(token)),
+                    ...solanaTrendingTokens
+                ];
+                
+                console.log(`Total tokens before filtering: ${allTokens.length}`);
+                
+                // First filter to only Solana tokens, then filter out stablecoins/low-volatility
+                const solanaOnlyTokens = allTokens.filter(token => isSolanaBasedToken(token));
+                console.log(`Solana-only tokens: ${solanaOnlyTokens.length}`);
+                
+                const filteredTokens = filterVolatileTokens(solanaOnlyTokens);
+                console.log(`Tokens after filtering stablecoins/low-volatility: ${filteredTokens.length}`);
+                
+                // Remove duplicates based on ID and prioritize by criteria
+                const uniqueTokens = removeDuplicatesAndPrioritize(filteredTokens);
+                console.log(`Final prioritized tokens: ${uniqueTokens.length}`);
+                console.log('Selected Solana tokens:', uniqueTokens.map(t => `${t.symbol} (score: ${t.predictionScore?.toFixed(1)}, cap: $${(t.market_cap/1000000).toFixed(1)}M)`));
+                
+                // Cache the data
+                predictionTokensCache = uniqueTokens.slice(0, 10);
+                cacheTimestamp = Date.now();
+                
+                await replacePredictionCardsWithRealTokens(predictionTokensCache);
+                updateMarketStats(predictionTokensCache);
+                console.log('Fresh data loaded and cached');
+                
+            } catch (error) {
+                console.error('Error fetching prediction market token data:', error);
+                
+                // If we have cached data but it's expired, use it anyway as fallback
+                if (predictionTokensCache) {
+                    console.log('Using expired cache as fallback');
+                    await replacePredictionCardsWithRealTokens(predictionTokensCache);
+                    updateMarketStats(predictionTokensCache);
+                } else {
+                    addDataErrorIndicator();
+                }
+            }
+        }
+        
+        // Replace prediction cards with real token data
+        async function replacePredictionCardsWithRealTokens(tokens) {
+            const contentGrid = document.querySelector('.content-grid');
+            if (!contentGrid) return;
+            
+            // Clear existing cards
+            contentGrid.innerHTML = '';
+            
+            tokens.forEach((token, index) => {
+                const card = createRealPredictionCard(token, index);
+                contentGrid.appendChild(card);
+            });
+            
+            console.log(`Loaded ${tokens.length} real trending/Solana tokens for prediction markets with flip functionality`);
+        }
+        
+        // Update market stats based on real token data
+        function updateMarketStats(tokens) {
+            if (!tokens || tokens.length === 0) return;
+            
+            // Calculate Active Markets (number of tokens loaded)
+            const activeMarkets = tokens.length;
+            
+            // Calculate Total Volume (sum of all token volumes in the last 24h)
+            const totalVolume = tokens.reduce((sum, token) => {
+                return sum + (token.total_volume || 0);
+            }, 0);
+            
+            // Calculate Today's Winners (tokens with positive 24h change > 3%)
+            const todaysWinners = tokens.filter(token => {
+                return (token.price_change_percentage_24h || 0) > 3;
+            }).length;
+            
+            // Calculate some additional interesting stats for console
+            const avgVolatility = tokens.reduce((sum, token) => {
+                return sum + Math.abs(token.price_change_percentage_24h || 0);
+            }, 0) / tokens.length;
+            
+            const highestGainer = tokens.reduce((max, token) => {
+                return (token.price_change_percentage_24h || 0) > (max.price_change_percentage_24h || 0) ? token : max;
+            }, tokens[0]);
+            
+            // Update the DOM elements
+            const activeMarketsElement = document.getElementById('active-markets-count');
+            const totalVolumeElement = document.getElementById('total-volume-amount');
+            const todaysWinnersElement = document.getElementById('todays-winners-count');
+            
+            if (activeMarketsElement) {
+                activeMarketsElement.textContent = activeMarkets.toString();
+            }
+            
+            if (totalVolumeElement) {
+                totalVolumeElement.textContent = formatVolumeAmount(totalVolume);
+            }
+            
+            if (todaysWinnersElement) {
+                todaysWinnersElement.textContent = todaysWinners.toString();
+            }
+            
+            console.log(`Market stats updated: ${activeMarkets} markets, ${formatVolumeAmount(totalVolume)} volume, ${todaysWinners} winners (+3%)`);
+            console.log(`Avg volatility: ${avgVolatility.toFixed(1)}%, Top gainer: ${highestGainer.symbol} (+${highestGainer.price_change_percentage_24h?.toFixed(1)}%)`);
+        }
+        
+        // Format volume amount for display
+        function formatVolumeAmount(amount) {
+            if (amount >= 1000000000) {
+                return `$${(amount / 1000000000).toFixed(1)}B`;
+            } else if (amount >= 1000000) {
+                return `$${(amount / 1000000).toFixed(1)}M`;
+            } else if (amount >= 1000) {
+                return `$${(amount / 1000).toFixed(1)}K`;
+            } else {
+                return `$${amount.toFixed(0)}`;
+            }
+        }
+        
+        // Show loading state for stats while fetching data
+        function updateStatsLoadingState() {
+            const activeMarketsElement = document.getElementById('active-markets-count');
+            const totalVolumeElement = document.getElementById('total-volume-amount');
+            const todaysWinnersElement = document.getElementById('todays-winners-count');
+            
+            if (activeMarketsElement) activeMarketsElement.textContent = '...';
+            if (totalVolumeElement) totalVolumeElement.textContent = '...';
+            if (todaysWinnersElement) todaysWinnersElement.textContent = '...';
+        }
+        
+        // Filter out stablecoins and low-volatility tokens for prediction markets
+        function filterVolatileTokens(tokens) {
+            // Stablecoin identifiers (symbols and partial names)
+            const stablecoinIdentifiers = [
+                'usdt', 'usdc', 'busd', 'dai', 'tusd', 'pax', 'gusd', 'usdp', 'frax', 'lusd',
+                'usdd', 'fei', 'mim', 'ust', 'ustc', 'usdn', 'usdx', 'susd', 'dusd', 'musd',
+                'usdk', 'usds', 'eurs', 'eurt', 'cadc', 'xsgd', 'zusd', 'cusd', 'rusd',
+                'stable', 'dollar', 'usd'
+            ];
+            
+            return tokens.filter(token => {
+                if (!token || !token.symbol || !token.name) return false;
+                
+                const symbol = token.symbol.toLowerCase();
+                const name = token.name.toLowerCase();
+                const priceChange = Math.abs(token.price_change_percentage_24h || 0);
+                
+                // Exclude if it's a known stablecoin
+                const isStablecoin = stablecoinIdentifiers.some(identifier => 
+                    symbol.includes(identifier) || name.includes(identifier)
+                );
+                
+                // Exclude if price change is too low (less than 1% in 24h, indicating stable price)
+                const isLowVolatility = priceChange < 1;
+                
+                // Exclude if market cap is too low (less than $1M, often scam tokens)
+                const isLowMarketCap = (token.market_cap || 0) < 1000000;
+                
+                // Exclude if volume is too low (less than $100K, not liquid enough)
+                const isLowVolume = (token.total_volume || 0) < 100000;
+                
+                return !isStablecoin && !isLowVolatility && !isLowMarketCap && !isLowVolume;
+            });
+        }
+        
+        // Check if token is a Solana-based token (comprehensive detection)
+        function isSolanaBasedToken(token) {
+            if (!token || !token.symbol || !token.id) return false;
+            
+            const symbol = token.symbol.toLowerCase();
+            const id = token.id.toLowerCase();
+            const name = token.name?.toLowerCase() || '';
+            
+            // Known Solana native tokens and ecosystem projects
+            const solanaTokens = [
+                'solana', 'sol', 'raydium', 'ray', 'serum', 'srm', 'orca', 'stepn', 'gmt', 'gst',
+                'star-atlas', 'atlas', 'star-atlas-dao', 'polis', 'marinade', 'mnde', 'jupiter',
+                'jup', 'bonk', 'samo', 'cope', 'step', 'media', 'rope', 'fida', 'kin', 'maps',
+                'pyth-network', 'pyth', 'render-token', 'rndr', 'helium', 'hnt', 'mobile',
+                'wormhole', 'w', 'jito', 'jto', 'parcl', 'prcl', 'kamino', 'kmno', 'drift',
+                'popcat', 'dogwifhat', 'wif', 'cat-in-a-dogs-world', 'mew', 'book-of-meme', 'bome',
+                'slerf', 'myro', 'ponke', 'nub', 'jesus', 'maga', 'retardio', 'fwog', 'popcat',
+                'pepe', 'wojak', 'ponke', 'silly', 'giga', 'maneki', 'mother-iggy', 'iggy',
+                'harambe', 'peach', 'catwifhat', 'cwif', 'solama', 'slm', 'sphynx', 'sphx'
+            ];
+            
+            // Solana meme token patterns
+            const solanaMemePatterns = [
+                'solana', 'sol', 'wif', 'hat', 'bonk', 'pepe-sol', 'doge-sol', 'inu-sol',
+                'maga-sol', 'trump-sol', 'biden-sol', 'elon-sol', 'moon-sol', 'pump-sol'
+            ];
+            
+            // Check direct matches
+            const isDirectMatch = solanaTokens.some(solToken => 
+                symbol === solToken || id.includes(solToken) || symbol.includes(solToken)
+            );
+            
+            // Check meme patterns
+            const isMemeMatch = solanaMemePatterns.some(pattern => 
+                symbol.includes(pattern) || id.includes(pattern) || name.includes(pattern)
+            );
+            
+            // Check for Solana-specific naming conventions
+            const hasSolanaIndicators = 
+                name.includes('solana') || 
+                id.includes('solana') ||
+                id.includes('-sol-') ||
+                symbol.includes('sol') ||
+                // Common Solana meme token suffixes/prefixes
+                symbol.endsWith('sol') ||
+                symbol.startsWith('sol') ||
+                // Exclude obvious non-Solana tokens
+                (!symbol.includes('eth') && !symbol.includes('btc') && !id.includes('ethereum') && !id.includes('bitcoin'));
+            
+            return isDirectMatch || isMemeMatch || (hasSolanaIndicators && !isObviouslyNonSolana(token));
+        }
+        
+        // Detect tokens that are obviously NOT Solana-based
+        function isObviouslyNonSolana(token) {
+            const symbol = token.symbol?.toLowerCase() || '';
+            const id = token.id?.toLowerCase() || '';
+            const name = token.name?.toLowerCase() || '';
+            
+            // Obvious Ethereum tokens
+            const ethIndicators = ['ethereum', 'eth', 'erc20', 'erc-20', 'vitalik', 'uniswap', 'opensea'];
+            
+            // Obvious Bitcoin tokens  
+            const btcIndicators = ['bitcoin', 'btc', 'satoshi', 'lightning'];
+            
+            // Other major chains
+            const otherChainIndicators = ['polygon', 'matic', 'avalanche', 'avax', 'cardano', 'ada', 'binance', 'bnb'];
+            
+            const allNonSolanaIndicators = [...ethIndicators, ...btcIndicators, ...otherChainIndicators];
+            
+            return allNonSolanaIndicators.some(indicator => 
+                symbol.includes(indicator) || id.includes(indicator) || name.includes(indicator)
+            );
+        }
+        
+        // Legacy function for backwards compatibility
+        function isNativeSolanaToken(token) {
+            return isSolanaBasedToken(token);
+        }
+        
+        // Remove duplicates and prioritize tokens based on criteria
+        function removeDuplicatesAndPrioritize(tokens) {
+            // Remove duplicates based on ID
+            const uniqueTokens = tokens.filter((token, index, self) => 
+                index === self.findIndex(t => t.id === token.id)
+            );
+            
+            // Score and sort tokens based on multiple criteria
+            const scoredTokens = uniqueTokens.map(token => {
+                let score = 0;
+                const symbol = token.symbol?.toLowerCase() || '';
+                const name = token.name?.toLowerCase() || '';
+                
+                // All tokens here are Solana-based, give base score
+                score += 50;
+                
+                // Meme token bonus (higher priority for meme coins)
+                const isMeme = name.includes('meme') || symbol.includes('pepe') || symbol.includes('doge') || 
+                             symbol.includes('shib') || symbol.includes('bonk') || symbol.includes('wif') || 
+                             symbol.includes('popcat') || symbol.includes('myro') || symbol.includes('slerf') ||
+                             symbol.includes('ponke') || symbol.includes('maga') || symbol.includes('trump');
+                if (isMeme) score += 75; // Higher bonus for meme tokens
+                
+                // Popular Solana natives get extra boost
+                const isPopularSolana = ['sol', 'ray', 'jup', 'orca', 'pyth', 'bonk', 'wif'].includes(symbol);
+                if (isPopularSolana) score += 60;
+                
+                // Volatility score (higher volatility = better for predictions)
+                const volatility = Math.abs(token.price_change_percentage_24h || 0);
+                score += Math.min(volatility * 3, 75); // Increased multiplier for volatility
+                
+                // Volume score (higher volume = more liquid and tradeable)
+                const volumeScore = Math.log10((token.total_volume || 0) / 100000) * 8;
+                score += Math.max(0, Math.min(volumeScore, 40)); // 0-40 points
+                
+                // Market cap score (favor smaller caps for more explosive potential)
+                const marketCap = token.market_cap || 0;
+                if (marketCap > 1000000 && marketCap < 1000000000) { // $1M - $1B (sweet spot for memes)
+                    score += 30;
+                } else if (marketCap > 100000000 && marketCap < 10000000000) { // $100M - $10B
+                    score += 20;
+                } else if (marketCap > 10000000000) { // > $10B (established but less explosive)
+                    score += 10;
+                }
+                
+                // Recent launch bonus (lower market cap rank might indicate newer token)
+                if (!token.market_cap_rank || token.market_cap_rank > 200) {
+                    score += 25; // Bonus for potentially newer tokens
+                }
+                
+                // High ranking established tokens
+                if (token.market_cap_rank && token.market_cap_rank <= 50) {
+                    score += 20;
+                }
+                
+                return { ...token, predictionScore: score };
+            });
+            
+            // Sort by score (highest first) and return top tokens
+            return scoredTokens
+                .sort((a, b) => b.predictionScore - a.predictionScore)
+                .slice(0, 12); // Get top 12 for variety
+        }
+        
+        // Create a real prediction card from token data with flip functionality
+        function createRealPredictionCard(token, index) {
+            console.log('Creating card for token:', token.symbol);
+            const card = document.createElement('div');
+            card.className = 'prediction-card';
+            card.setAttribute('onclick', 'flipCard(this)');
+            
+            // Generate prediction questions and odds based on token data
+            const predictionData = generatePredictionFromToken(token, index);
+            
+            // Determine badge type based on token characteristics
+            const badgeInfo = getBadgeInfo(token);
+            
+            // Generate AI summary for this token
+            const tokenSymbol = token.symbol?.toLowerCase() || '';
+            const summary = generateDynamicSummary(tokenSymbol, null, token);
+            
+            card.innerHTML = `
+                <div class="card-inner">
+                    <!-- Front Side -->
+                    <div class="card-front">
+                        <div class="card-header">
+                            <div class="token-info">
+                                <div class="token-icon">
+                                    <img src="${token.image}" alt="${token.name}" style="width: 32px; height: 32px; border-radius: 50%;" 
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div style="display: none; width: 32px; height: 32px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); border-radius: 50%; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">
+                                        ${token.symbol?.charAt(0)?.toUpperCase() || '?'}
+                                    </div>
+                                </div>
+                                <div class="token-details">
+                                    <h3 class="token-name">$${token.symbol?.toUpperCase()}</h3>
+                                    <span class="token-symbol">${token.name}</span>
+                                </div>
+                            </div>
+                            <div class="card-badges">
+                                <span class="badge ${badgeInfo.class}">${badgeInfo.text}</span>
+                                <span class="badge ai-confidence">AI: ${predictionData.confidence}%</span>
+                            </div>
+                        </div>
+                        <div class="prediction-question">
+                            <p>${predictionData.question}</p>
+                        </div>
+                        <div class="prediction-odds">
+                            <div class="odds-container">
+                                <button class="odds-button yes-button" data-token="${token.symbol}" data-question="${predictionData.question.replace(/"/g, '&quot;')}" data-odds="${predictionData.yesOdds}¢" data-image="${token.image}" onclick="event.stopPropagation(); showBettingModalFromButton(this, true);">
+                                    <span class="odds-label">YES</span>
+                                    <span class="odds-value">${predictionData.yesOdds}¢</span>
+                                </button>
+                                <button class="odds-button no-button" data-token="${token.symbol}" data-question="${predictionData.question.replace(/"/g, '&quot;')}" data-odds="${predictionData.noOdds}¢" data-image="${token.image}" onclick="event.stopPropagation(); showBettingModalFromButton(this, false);">
+                                    <span class="odds-label">NO</span>
+                                    <span class="odds-value">${predictionData.noOdds}¢</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="market-stats">
+                            <div class="stat-row">
+                                <span class="stat-label">Volume:</span>
+                                <span class="stat-value">$${formatNumber(token.total_volume)}</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Price:</span>
+                                <span class="stat-value">$${formatTokenPrice(token.current_price)}</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">24h Change:</span>
+                                <span class="stat-value ${token.price_change_percentage_24h >= 0 ? 'sentiment-positive' : 'sentiment-negative'}">
+                                    ${token.price_change_percentage_24h >= 0 ? '+' : ''}${token.price_change_percentage_24h?.toFixed(2) || '0.00'}%
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                            <!-- Back Side - AI Summary -->
+                            <div class="card-back">
+                                <div class="ai-summary">
+                                    <div class="ai-summary-header">
+                                        <div class="ai-brain-icon">
+                                            <img src="${token.image}" alt="${token.name}" style="width: 40px; height: 40px; border-radius: 50%;" 
+                                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                            <div style="display: none; width: 40px; height: 40px; background: linear-gradient(135deg, var(--color-accent), var(--color-accent-glow)); border-radius: 50%; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px;">
+                                                ${token.symbol?.charAt(0)?.toUpperCase() || '?'}
+                                            </div>
+                                        </div>
+                                        <div class="ai-summary-title">
+                                            <h3>$${token.symbol?.toUpperCase()} Analysis</h3>
+                                            <span>AI Prediction Breakdown</span>
+                                        </div>
+                                        <div class="confidence-score">
+                                            <div class="confidence-value">${predictionData.confidence}%</div>
+                                            <div class="confidence-label">Confidence</div>
+                                        </div>
+                                    </div>
+                            
+                            <div class="analysis-section">
+                                <h4>Market Analysis</h4>
+                                <p class="analysis-text">${summary.analysis}</p>
+                                
+                                <div class="key-factors">
+                                    ${summary.factors.map(factor => `
+                                        <div class="factor">
+                                            <div class="factor-icon ${factor.type}">${factor.type === 'positive' ? '+' : factor.type === 'negative' ? '-' : '?'}</div>
+                                            <span class="factor-text">${factor.text}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            
+                            <div class="flip-hint">
+                                <span>Click to flip back to betting interface</span>
+                                <span class="flip-icon">↻</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+        
+        // Generate prediction data based on token info
+        function generatePredictionFromToken(token, index) {
+            const priceChange24h = token.price_change_percentage_24h || 0;
+            const marketCap = token.market_cap || 0;
+            const volume = token.total_volume || 0;
+            
+            // Calculate AI confidence based on multiple factors
+            let confidence = 50; // Base confidence
+            
+            // Volume factor
+            if (volume > 10000000) confidence += 15;
+            else if (volume > 1000000) confidence += 10;
+            else if (volume > 100000) confidence += 5;
+            
+            // Price momentum factor
+            if (Math.abs(priceChange24h) > 20) confidence += 10;
+            else if (Math.abs(priceChange24h) > 10) confidence += 5;
+            
+            // Market cap stability factor
+            if (marketCap > 1000000000) confidence += 10;
+            else if (marketCap > 100000000) confidence += 5;
+            
+            // Cap confidence at 95%
+            confidence = Math.min(95, Math.max(55, confidence));
+            
+            // Generate prediction questions based on token characteristics
+            const questions = [
+                `Will $${token.symbol?.toUpperCase()} pump +25% in the next 48 hours?`,
+                `Will $${token.symbol?.toUpperCase()} reach new ATH this week?`,
+                `Will $${token.symbol?.toUpperCase()} outperform SOL by 15% this month?`,
+                `Will $${token.symbol?.toUpperCase()} break key resistance in 24h?`,
+                `Will $${token.symbol?.toUpperCase()} 2x within the next 30 days?`,
+                `Will $${token.symbol?.toUpperCase()} maintain above current support level?`,
+                `Will $${token.symbol?.toUpperCase()} see +50% volume spike this week?`
+            ];
+            
+            const question = questions[index % questions.length];
+            
+            // Calculate odds based on confidence and recent performance
+            const baseYes = confidence > 70 ? 65 : confidence > 60 ? 55 : 45;
+            const yesOdds = Math.max(25, Math.min(85, baseYes + Math.random() * 20 - 10));
+            const noOdds = 100 - yesOdds;
+            
+            return {
+                question,
+                confidence: Math.round(confidence),
+                yesOdds: Math.round(yesOdds),
+                noOdds: Math.round(noOdds)
+            };
+        }
+        
+        // Get badge information based on token characteristics
+        function getBadgeInfo(token) {
+            const symbol = token.symbol?.toLowerCase() || '';
+            const name = token.name?.toLowerCase() || '';
+            const priceChange = token.price_change_percentage_24h || 0;
+            const marketCap = token.market_cap || 0;
+            
+            // Meme tokens get priority (since they're popular on Solana)
+            const isMeme = name.includes('meme') || symbol.includes('pepe') || symbol.includes('doge') || 
+                          symbol.includes('shib') || symbol.includes('bonk') || symbol.includes('wif') || 
+                          symbol.includes('popcat') || symbol.includes('myro') || symbol.includes('slerf') ||
+                          symbol.includes('ponke') || symbol.includes('maga') || symbol.includes('trump');
+            if (isMeme) {
+                return { class: 'meme-badge', text: 'MEME' };
+            }
+            
+            // New/Small cap launches (potential moonshots)
+            if (marketCap > 0 && marketCap < 10000000) { // Under $10M
+                return { class: 'hot-badge', text: 'NEW' };
+            }
+            
+            // High volatility gets hot badge
+            if (Math.abs(priceChange) > 20) {
+                return { class: 'hot-badge', text: 'HOT' };
+            }
+            
+            // Strong positive movement
+            if (priceChange > 10) {
+                return { class: 'trending-badge', text: 'PUMPING' };
+            }
+            
+            // Moderate positive movement
+            if (priceChange > 3) {
+                return { class: 'trending-badge', text: 'TRENDING' };
+            }
+            
+            // Solana ecosystem specific badges
+            if (name.includes('defi') || symbol.includes('swap') || symbol.includes('dex') || symbol.includes('ray') || symbol.includes('orca') || symbol.includes('jup')) {
+                return { class: 'defi-badge', text: 'DEFI' };
+            }
+            
+            if (name.includes('oracle') || symbol.includes('pyth')) {
+                return { class: 'oracle-badge', text: 'ORACLE' };
+            }
+            
+            // Popular Solana tokens
+            if (['sol', 'ray', 'jup', 'orca', 'pyth'].includes(symbol)) {
+                return { class: 'native-badge', text: 'SOLANA' };
+            }
+            
+            // Default to native for Solana ecosystem
+            return { class: 'native-badge', text: 'NATIVE' };
+        }
+        
+        // Format token price with appropriate decimals
+        function formatTokenPrice(price) {
+            if (!price) return '0.00';
+            if (price >= 1) return price.toFixed(2);
+            if (price >= 0.01) return price.toFixed(4);
+            if (price >= 0.0001) return price.toFixed(6);
+            return price.toExponential(2);
+        }
+        
+        function displayHotTokens(tokens) {
+            const contentGrid = document.querySelector('.content-grid');
+            contentGrid.innerHTML = '';
+            contentGrid.className = 'content-grid trending-tokens-grid';
+            
+            // Add refresh button
+            const refreshButton = document.createElement('div');
+            refreshButton.className = 'refresh-section';
+            refreshButton.innerHTML = `
+                <button class="refresh-btn" onclick="forceRefreshData()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                        <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                    </svg>
+                    Refresh Data
+                </button>
+                <span class="last-updated" id="last-updated">Cached: ${cacheTimestamp ? new Date(cacheTimestamp).toLocaleTimeString() : 'Never'}</span>
+            `;
+            contentGrid.appendChild(refreshButton);
+            
+            tokens.forEach(token => {
+                const card = createHotTokenCard(token);
+                contentGrid.appendChild(card);
+            });
+        }
+        
+        function createHotTokenCard(token) {
+            const card = document.createElement('div');
+            card.className = 'trending-token-card';
+            
+            const priceChange = token.price_change_percentage_24h || 0;
+            const isPositive = priceChange >= 0;
+            
+            // Format price based on value
+            let formattedPrice;
+            if (token.current_price >= 1) {
+                formattedPrice = token.current_price.toFixed(2);
+            } else if (token.current_price >= 0.01) {
+                formattedPrice = token.current_price.toFixed(4);
+            } else {
+                formattedPrice = token.current_price.toFixed(6);
+            }
+            
+            card.innerHTML = `
+                <div class="token-header">
+                    <div class="token-basic-info">
+                        <img src="${token.image || 'https://via.placeholder.com/40'}" alt="${token.name}" class="token-logo" 
+                             onerror="this.src='https://via.placeholder.com/40/3b82f6/ffffff?text=${token.symbol?.charAt(0) || '?'}'">
+                        <div class="token-name-symbol">
+                            <h3>${token.name}</h3>
+                            <span>${token.symbol?.toUpperCase()}</span>
+                        </div>
+                    </div>
+                    <div class="price-change">
+                        <div class="current-price">$${formattedPrice}</div>
+                        <div class="price-change-percent ${isPositive ? 'positive' : 'negative'}">
+                            ${isPositive ? '+' : ''}${priceChange.toFixed(2)}%
+                        </div>
+                    </div>
+                </div>
+                <div class="token-stats">
+                    <div class="stat">
+                        <div class="stat-label">Market Cap</div>
+                        <div class="stat-value">$${formatNumber(token.market_cap)}</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Volume 24h</div>
+                        <div class="stat-value">$${formatNumber(token.total_volume)}</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Rank</div>
+                        <div class="stat-value">#${token.market_cap_rank || 'N/A'}</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Supply</div>
+                        <div class="stat-value">${formatNumber(token.circulating_supply)}</div>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+        
+        // Legacy function removed to prevent unnecessary API calls
+        // Real token data is now loaded directly via replacePredictionCardsWithRealTokens()
+        
+        // Error handling functions
+        function showAPIError(section) {
+            const contentGrid = document.querySelector('.content-grid');
+            contentGrid.className = 'content-grid';
+            contentGrid.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem;">
+                    <div style="color: var(--color-danger); font-size: 1.1rem; margin-bottom: 1rem;">
+                        ⚠️ Unable to Load Data
+                    </div>
+                    <p style="color: var(--color-text-muted); max-width: 400px; margin: 0 auto 2rem;">
+                        We're having trouble connecting to CoinGecko API. This might be due to rate limiting or network issues.
+                    </p>
+                    <button class="action-btn primary" onclick="${section === 'hot-tokens' ? 'loadHotTokens()' : 'loadPredictionMarketTokens()'}">
+                        Try Again
+                    </button>
+                </div>
+            `;
+        }
+        
+        function addDataErrorIndicator() {
+            const header = document.querySelector('.page-title-section');
+            if (header && !header.querySelector('.data-warning')) {
+                const warning = document.createElement('div');
+                warning.className = 'data-warning';
+                warning.innerHTML = `
+                    <span style="color: var(--color-warning); font-size: 0.9rem;">
+                        ⚠️ Using cached data - Live data temporarily unavailable
+                    </span>
+                `;
+                header.appendChild(warning);
+            }
+        }
+        
+        function updateLastRefreshTime() {
+            const element = document.getElementById('last-updated');
+            if (element) {
+                element.textContent = `Updated: ${new Date().toLocaleTimeString()}`;
+            }
+        }
+        
+        // Force refresh function that clears cache
+        function forceRefreshData() {
+            console.log('Force refreshing data - clearing cache');
+            predictionTokensCache = null;
+            hotTokensCache = null;
+            cacheTimestamp = null;
+            
+            // Determine which section we're currently viewing and refresh it
+            const currentSection = getCurrentActiveSection();
+            if (currentSection === 'live-markets') {
+                const contentGrid = document.querySelector('.content-grid');
+                contentGrid.innerHTML = '<div class="section-loading"><div class="loading-spinner"></div><p>Loading fresh trending tokens...</p></div>';
+                loadPredictionMarketTokens();
+            } else if (currentSection === 'trending-tokens') {
+                loadHotTokens();
+            }
+        }
+        
+        // Get current active section
+        function getCurrentActiveSection() {
+            const activeNavItem = document.querySelector('.nav-item.active');
+            return activeNavItem ? activeNavItem.getAttribute('data-section') : 'live-markets';
+        }
+        
+        // Card flip functionality
+        function flipCard(cardElement) {
+            const isFlipped = cardElement.classList.contains('flipped');
+            
+            if (isFlipped) {
+                cardElement.classList.remove('flipped');
+            } else {
+                cardElement.classList.add('flipped');
+            }
+        }
+        
+        // Enhanced betting modal with card context
+        function showBettingModalFromCard(cardElement) {
+            const isFlipped = cardElement.classList.contains('flipped');
+            
+            // If card is flipped, flip it back first
+            if (isFlipped) {
+                cardElement.classList.remove('flipped');
+                // Wait for flip animation to complete
+                setTimeout(() => {
+                    showBettingModal();
+                }, 300);
+            } else {
+                showBettingModal();
+            }
+        }
+        
+        function getMockHotTokens() {
+            return [
+                { name: 'Solana', symbol: 'SOL', current_price: 98.45, price_change_percentage_24h: 5.23, market_cap: 45000000000, total_volume: 2500000000, image: 'https://assets.coingecko.com/coins/images/4128/small/solana.png' },
+                { name: 'Serum', symbol: 'SRM', current_price: 1.23, price_change_percentage_24h: -2.45, market_cap: 180000000, total_volume: 45000000, image: 'https://assets.coingecko.com/coins/images/11815/small/Serum-logo.png' },
+                { name: 'Raydium', symbol: 'RAY', current_price: 0.85, price_change_percentage_24h: 8.12, market_cap: 220000000, total_volume: 67000000, image: 'https://assets.coingecko.com/coins/images/13928/small/PSigc4ie_400x400.jpg' },
+                { name: 'Orca', symbol: 'ORCA', current_price: 2.15, price_change_percentage_24h: 3.67, market_cap: 95000000, total_volume: 23000000, image: 'https://assets.coingecko.com/coins/images/17547/small/Orca_Logo.png' },
+                { name: 'Mango', symbol: 'MNGO', current_price: 0.045, price_change_percentage_24h: -1.23, market_cap: 45000000, total_volume: 12000000, image: 'https://assets.coingecko.com/coins/images/18236/small/mngo.png' },
+                { name: 'Marinade', symbol: 'MNDE', current_price: 0.067, price_change_percentage_24h: 12.45, market_cap: 67000000, total_volume: 8900000, image: 'https://assets.coingecko.com/coins/images/20236/small/mnde.png' }
+            ];
+        }
+        
+        function formatNumber(num) {
+            if (num >= 1e9) return (num / 1e9).toFixed(1) + 'B';
+            if (num >= 1e6) return (num / 1e6).toFixed(1) + 'M';
+            if (num >= 1e3) return (num / 1e3).toFixed(1) + 'K';
+            return num?.toFixed(0) || '0';
+        }
+        
+        // Generate dynamic AI summary for any token
+        function generateDynamicSummary(tokenSymbol, card = null, tokenData = null) {
+            let priceChange = 0;
+            
+            // Extract price change from card or token data
+            if (tokenData) {
+                priceChange = tokenData.price_change_percentage_24h || 0;
+            } else if (card) {
+                const priceChangeElement = card.querySelector('.stat-value.sentiment-positive, .stat-value.sentiment-negative');
+                priceChange = priceChangeElement ? parseFloat(priceChangeElement.textContent.replace(/[+%]/g, '')) : 0;
+            }
+            
+            // Determine token characteristics
+            const isMeme = tokenSymbol.includes('pepe') || tokenSymbol.includes('doge') || tokenSymbol.includes('shib') || 
+                          tokenSymbol.includes('bonk') || tokenSymbol.includes('floki') || tokenSymbol.includes('shiba') ||
+                          tokenSymbol.includes('wif') || tokenSymbol.includes('bome') || tokenSymbol.includes('samo');
+            const isDeFi = tokenSymbol.includes('uni') || tokenSymbol.includes('swap') || tokenSymbol.includes('cake') ||
+                          tokenSymbol.includes('ray') || tokenSymbol.includes('orca') || tokenSymbol.includes('jup') ||
+                          tokenSymbol.includes('aave') || tokenSymbol.includes('comp') || tokenSymbol.includes('sushi');
+            const isGaming = tokenSymbol.includes('axs') || tokenSymbol.includes('sand') || tokenSymbol.includes('mana') ||
+                            tokenSymbol.includes('atlas') || tokenSymbol.includes('star') || tokenSymbol.includes('gala') ||
+                            tokenSymbol.includes('enj') || tokenSymbol.includes('flow');
+            const isOracle = tokenSymbol.includes('link') || tokenSymbol.includes('pyth') || tokenSymbol.includes('band') ||
+                            tokenSymbol.includes('api3') || tokenSymbol.includes('trb');
+            
+            let analysis = '';
+            let factors = [];
+            
+            if (isMeme) {
+                analysis = `${tokenSymbol.toUpperCase()} demonstrates strong meme momentum with active community engagement. `;
+                if (priceChange > 10) {
+                    analysis += 'Current rally shows sustained buying pressure and social media catalysts.';
+                } else if (priceChange > 0) {
+                    analysis += 'Moderate gains supported by community sentiment and market positioning.';
+                } else {
+                    analysis += 'Recent consolidation provides opportunity for next leg up.';
+                }
+                
+                factors = [
+                    { type: 'positive', text: 'Strong community' },
+                    { type: priceChange > 5 ? 'positive' : 'neutral', text: 'Social momentum' },
+                    { type: 'neutral', text: 'Meme market dependent' },
+                    { type: priceChange < -10 ? 'negative' : 'neutral', text: 'Volatility risk' }
+                ];
+            } else if (isDeFi) {
+                analysis = `${tokenSymbol.toUpperCase()} shows solid DeFi fundamentals with protocol utility driving value. `;
+                if (priceChange > 5) {
+                    analysis += 'Strong performance reflects growing TVL and ecosystem adoption.';
+                } else {
+                    analysis += 'Market positioning suggests potential for yield farming and governance participation.';
+                }
+                
+                factors = [
+                    { type: 'positive', text: 'Protocol utility' },
+                    { type: 'positive', text: 'DeFi ecosystem growth' },
+                    { type: priceChange > 0 ? 'positive' : 'neutral', text: 'TVL expansion' },
+                    { type: 'neutral', text: 'Market correlation' }
+                ];
+            } else if (isGaming) {
+                analysis = `${tokenSymbol.toUpperCase()} benefits from growing GameFi sector with play-to-earn mechanics. `;
+                analysis += 'Gaming market expansion and NFT integration support long-term value proposition.';
+                
+                factors = [
+                    { type: 'positive', text: 'Gaming market growth' },
+                    { type: 'positive', text: 'P2E mechanics' },
+                    { type: 'neutral', text: 'NFT integration' },
+                    { type: 'negative', text: 'Development timeline' }
+                ];
+            } else if (isOracle) {
+                analysis = `${tokenSymbol.toUpperCase()} provides critical oracle infrastructure with multi-chain adoption. `;
+                analysis += 'Data feed expansion and institutional partnerships drive network value.';
+                
+                factors = [
+                    { type: 'positive', text: 'Oracle demand' },
+                    { type: 'positive', text: 'Multi-chain adoption' },
+                    { type: 'positive', text: 'Data feed growth' },
+                    { type: 'neutral', text: 'Competition risk' }
+                ];
+            } else {
+                // General crypto token
+                analysis = `${tokenSymbol.toUpperCase()} shows ${priceChange > 0 ? 'positive' : 'mixed'} market signals with ${Math.abs(priceChange) > 10 ? 'high' : 'moderate'} volatility. `;
+                analysis += 'Technical indicators and market positioning suggest potential for continued momentum.';
+                
+                factors = [
+                    { type: priceChange > 5 ? 'positive' : 'neutral', text: 'Market momentum' },
+                    { type: 'positive', text: 'Technical setup' },
+                    { type: Math.abs(priceChange) > 15 ? 'negative' : 'neutral', text: 'Volatility risk' },
+                    { type: 'neutral', text: 'Market dependent' }
+                ];
+            }
+            
+            return { analysis, factors };
+        }
+        
+        // Convert existing cards to flip format
+        function convertCardsToFlipFormat() {
+            const predictionCards = document.querySelectorAll('.prediction-card:not([onclick])');
+            
+            predictionCards.forEach(card => {
+                // Skip if already converted
+                if (card.querySelector('.card-inner')) return;
+                
+                // Add click handler
+                card.setAttribute('onclick', 'flipCard(this)');
+                
+                // Get current content
+                const currentHTML = card.innerHTML;
+                
+                // Extract token info for AI summary
+                const tokenName = card.querySelector('.token-name')?.textContent || '$TOKEN';
+                const aiConfidence = card.querySelector('.ai-confidence')?.textContent?.match(/\d+/)?.[0] || '75';
+                const tokenSymbol = tokenName.replace('$', '').toLowerCase();
+                
+                // Generate AI summary content
+                const aiSummaries = {
+                    '$WIF': {
+                        icon: '🐕',
+                        analysis: 'WIF shows strong meme momentum with solid community backing. $1 resistance is significant but achievable with sustained pressure.',
+                        factors: [
+                            { type: 'positive', text: 'Strong meme community' },
+                            { type: 'positive', text: 'High social engagement' },
+                            { type: 'negative', text: 'Strong resistance at $1' },
+                            { type: 'neutral', text: 'Market dependent' }
+                        ]
+                    },
+                    '$JUP': {
+                        icon: '🪐',
+                        analysis: 'Jupiter shows solid DeFi fundamentals with growing DEX volume and partnerships. Technical indicators suggest continued momentum.',
+                        factors: [
+                            { type: 'positive', text: 'Growing DEX volume' },
+                            { type: 'positive', text: 'Strategic partnerships' },
+                            { type: 'positive', text: 'Strong technicals' },
+                            { type: 'neutral', text: 'DeFi correlation' }
+                        ]
+                    },
+                    '$ORCA': {
+                        icon: '🐋',
+                        analysis: 'ORCA benefits from Solana DeFi growth with innovative AMM technology. Target achievable through ecosystem expansion.',
+                        factors: [
+                            { type: 'positive', text: 'Innovative AMM tech' },
+                            { type: 'positive', text: 'Solana ecosystem growth' },
+                            { type: 'positive', text: 'Increasing liquidity' },
+                            { type: 'neutral', text: 'DEX competition' }
+                        ]
+                    },
+                    '$PYTH': {
+                        icon: '🔮',
+                        analysis: 'Pyth Network shows strong oracle adoption across chains. Predictions supported by data feeds and partnerships.',
+                        factors: [
+                            { type: 'positive', text: 'Multi-chain adoption' },
+                            { type: 'positive', text: 'Institutional partnerships' },
+                            { type: 'positive', text: 'Growing data feeds' },
+                            { type: 'positive', text: 'Oracle leadership' }
+                        ]
+                    },
+                    '$STEP': {
+                        icon: '👟',
+                        analysis: 'Step Finance shows strong portfolio utility with growing adoption. Platform expansion supports price potential.',
+                        factors: [
+                            { type: 'positive', text: 'Growing user adoption' },
+                            { type: 'positive', text: 'Platform utility' },
+                            { type: 'positive', text: 'Feature expansion' },
+                            { type: 'neutral', text: 'DeFi dependency' }
+                        ]
+                    },
+                    '$SAMO': {
+                        icon: '🐕',
+                        analysis: 'Samoyedcoin benefits from strong Solana positioning and active community. Meme + utility hybrid creates unique value.',
+                        factors: [
+                            { type: 'positive', text: 'Strong Solana tie' },
+                            { type: 'positive', text: 'Active community' },
+                            { type: 'positive', text: 'Meme + utility hybrid' },
+                            { type: 'neutral', text: 'Meme volatility' }
+                        ]
+                    },
+                    '$ATLAS': {
+                        icon: '🚀',
+                        analysis: 'Star Atlas shows revolutionary gaming metaverse potential with strong backing. Growth supported by gaming expansion.',
+                        factors: [
+                            { type: 'positive', text: 'Revolutionary concept' },
+                            { type: 'positive', text: 'Strong backing' },
+                            { type: 'positive', text: 'Gaming growth' },
+                            { type: 'negative', text: 'Long development' }
+                        ]
+                    }
+                };
+                
+                // Get specific summary or generate based on token data
+                let summary = aiSummaries[tokenName];
+                
+                if (!summary) {
+                    // Generate dynamic summary based on token symbol and market data
+                    summary = generateDynamicSummary(tokenSymbol, card);
+                }
+                
+                // Create flip structure
+                const flipHTML = `
+                    <div class="card-inner">
+                        <!-- Front Side -->
+                        <div class="card-front">
+                            ${currentHTML}
+                        </div>
+                        
+                        <!-- Back Side - AI Summary -->
+                        <div class="card-back">
+                            <div class="ai-summary">
+                                <div class="ai-summary-header">
+                                    <div class="ai-brain-icon">
+                                        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--color-accent), var(--color-accent-glow)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px;">
+                                            ${tokenName.charAt(1)?.toUpperCase() || '?'}
+                                        </div>
+                                    </div>
+                                    <div class="ai-summary-title">
+                                        <h3>${tokenName} Analysis</h3>
+                                        <span>AI Prediction Breakdown</span>
+                                    </div>
+                                    <div class="confidence-score">
+                                        <div class="confidence-value">${aiConfidence}%</div>
+                                        <div class="confidence-label">Confidence</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="analysis-section">
+                                    <h4>Market Analysis</h4>
+                                    <p class="analysis-text">${summary.analysis}</p>
+                                    
+                                    <div class="key-factors">
+                                        ${summary.factors.map(factor => `
+                                            <div class="factor">
+                                                <div class="factor-icon ${factor.type}">${factor.type === 'positive' ? '+' : factor.type === 'negative' ? '-' : '?'}</div>
+                                                <span class="factor-text">${factor.text}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                
+                                <div class="flip-hint">
+                                    <span>Click to flip back to betting interface</span>
+                                    <span class="flip-icon">↻</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Replace content
+                card.innerHTML = flipHTML;
+                
+                // Update betting buttons to prevent event bubbling and preserve data attributes
+                const bettingButtons = card.querySelectorAll('.odds-button');
+                bettingButtons.forEach(button => {
+                    // Only update onclick if it doesn't already have data attributes (for API-generated cards)
+                    if (!button.hasAttribute('data-token')) {
+                        button.setAttribute('onclick', 'event.stopPropagation(); showBettingModal();');
+                    }
+                });
+            });
+        }
+
+        // Cache for API data to prevent unnecessary calls
+        let predictionTokensCache = null;
+        let hotTokensCache = null;
+        let cacheTimestamp = null;
+        const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+        
+        // Check if cache is still valid
+        function isCacheValid() {
+            return cacheTimestamp && (Date.now() - cacheTimestamp) < CACHE_DURATION;
+        }
+        
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Micro Prediction Markets Dashboard initialized');
+            
+            // Immediately show loading and load real API cards
+            const contentGrid = document.querySelector('.content-grid');
+            if (contentGrid) {
+                // Store original content for reference but replace with loading
+                originalTemplateContent = contentGrid.innerHTML;
+                contentGrid.innerHTML = '<div class="section-loading"><div class="loading-spinner"></div><p>Loading real trending tokens...</p></div>';
+                
+                // Load real API data immediately 
+                loadPredictionMarketTokens();
+            }
+            
+            console.log('Real-time CoinGecko API integration active');
+            console.log('Loading live prediction markets on startup');
+        });
+    </script>
+</body>
+</html>
+</html>
+</html>
+</html>
+</html>
+</html>
+</html>

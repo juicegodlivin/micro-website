@@ -1,0 +1,126 @@
+<!-- 
+  Wallet Authentication System HTML Template
+  Copy this structure into your HTML body
+-->
+
+<!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen">
+  <!-- Video Background (optional) -->
+  <div class="loading-video-background">
+    <video autoplay muted loop>
+      <source src="background-video.mp4" type="video/mp4">
+    </video>
+  </div>
+  
+  <!-- Red Filter Overlay -->
+  <div class="loading-video-overlay"></div>
+  
+  <!-- Loading Content -->
+  <div class="loading-container">
+    <!-- Animated Blood Drops -->
+    <div class="blood-drop-loader">
+      <div class="blood-drop"></div>
+      <div class="blood-drop"></div>
+      <div class="blood-drop"></div>
+    </div>
+    
+    <!-- Main Loading Text -->
+    <div class="loading-text">BLOOD</div>
+    <div class="loading-subtitle">Initializing liquidation intelligence...</div>
+    
+    <!-- Progress Bar -->
+    <div class="loading-progress">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressBar"></div>
+      </div>
+      <div class="loading-percentage" id="loadingPercentage">0%</div>
+    </div>
+  </div>
+</div>
+
+<!-- Authentication Screen -->
+<div class="auth-screen hidden" id="authScreen">
+  <!-- Background Effects -->
+  <div class="auth-backdrop"></div>
+  
+  <!-- Auth Container -->
+  <div class="auth-container">
+    <!-- Header -->
+    <div class="auth-header">
+      <div class="auth-logo">B</div>
+      <h1 class="auth-title">INITIATE CONNECTION</h1>
+      <p class="auth-subtitle">Select your blockchain interface to access liquidation intelligence</p>
+    </div>
+    
+    <!-- Body -->
+    <div class="auth-body">
+      <!-- Wallet Selection Grid -->
+      <div class="wallet-grid">
+        <!-- Phantom Wallet -->
+        <div class="wallet-card" data-wallet="phantom">
+          <div class="wallet-card-inner">
+            <img class="wallet-icon" src="wallet-auth-system/assets/phantom-wallet-logo.png" alt="Phantom Wallet" />
+            <div class="wallet-info">
+              <div class="wallet-name">PHANTOM</div>
+              <div class="wallet-desc">SOL • PROTOCOL</div>
+            </div>
+            <div class="connect-text">CONNECT</div>
+          </div>
+        </div>
+        
+        <!-- Solflare Wallet -->
+        <div class="wallet-card" data-wallet="solflare">
+          <div class="wallet-card-inner">
+            <img class="wallet-icon" src="wallet-auth-system/assets/solflare-wallet-logo.jpg" alt="Solflare Wallet" />
+            <div class="wallet-info">
+              <div class="wallet-name">SOLFLARE</div>
+              <div class="wallet-desc">SOL • SECURE</div>
+            </div>
+            <div class="connect-text">CONNECT</div>
+          </div>
+        </div>
+        
+        <!-- MetaMask Wallet -->
+        <div class="wallet-card" data-wallet="metamask">
+          <div class="wallet-card-inner">
+            <img class="wallet-icon" src="wallet-auth-system/assets/metamask-wallet-logo.jpg" alt="MetaMask Wallet" />
+            <div class="wallet-info">
+              <div class="wallet-name">METAMASK</div>
+              <div class="wallet-desc">ETH • EVM</div>
+            </div>
+            <div class="connect-text">CONNECT</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="auth-footer">
+      <p class="auth-disclaimer">
+        🔒 SECURE & ENCRYPTED CONNECTION<br>
+        NEVER STORE YOUR PRIVATE KEYS OR PERSONAL INFORMATION
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content Container -->
+<div class="main-content hidden" id="mainContent">
+  <!-- Your existing website content goes here -->
+  <!-- This div will be shown after successful wallet connection -->
+  
+  <!-- Example content structure: -->
+  <!--
+  <header>
+    <nav>Your navigation</nav>
+  </header>
+  
+  <main>
+    <section>Your main content</section>
+  </main>
+  
+  <footer>
+    <p>Your footer</p>
+  </footer>
+  -->
+</div>

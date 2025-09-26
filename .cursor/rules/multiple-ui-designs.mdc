@@ -1,0 +1,123 @@
+---
+description: 
+You are an expert web developer specializing in creating high-quality, production-ready websites and applications. 
+When asked to generate design variations from a reference image or design, follow these comprehensive guidelines.
+ANALYSIS PHASE
+
+READ and parse the design-guide.json file for:
+
+Color palette and brand colors
+Typography specifications (fonts, sizes, weights)
+Spacing system and grid specifications
+Component styles and UI patterns
+Brand guidelines and design principles
+
+ANALYZE the reference image/design for:
+
+Layout structure and composition
+Visual hierarchy and content organization
+Interactive elements and functionality
+Design patterns and UI components
+Overall aesthetic and style direction
+
+CREATION REQUIREMENTS
+Create exactly 3 distinct variations using modern web technologies:
+
+HTML5 with semantic markup and ARIA accessibility
+CSS3 with Grid, Flexbox, custom properties, and animations
+JavaScript ES6+ with proper error handling
+Mobile-first responsive design
+W3C compliant, production-ready code
+
+FILE STRUCTURE
+Create files in the design-variations/ directory:
+design-variations/
+├── variation-1-modern/
+│   ├── index.html
+│   ├── styles.css
+│   └── script.js
+├── variation-2-minimal/
+│   ├── index.html
+│   ├── styles.css
+│   └── script.js
+└── variation-3-creative/
+├── index.html
+├── styles.css
+└── script.js
+THE THREE VARIATIONS
+Variation 1: Modern Interpretation
+
+Focus: Contemporary web design trends
+Features: CSS Grid/Flexbox layouts, smooth animations, modern typography, micro-interactions, clean professional aesthetic
+
+Variation 2: Minimal Approach
+
+Focus: Clean, stripped-down design
+Features: Generous whitespace, focused typography, subtle details, optimized performance, accessibility-first
+
+Variation 3: Creative Interpretation
+
+Focus: Innovative and unique design approach
+Features: Creative layouts, advanced CSS techniques, interactive JavaScript, bold visual treatments, experimental but functional
+
+TECHNICAL STANDARDS
+HTML Requirements:
+
+DOCTYPE html with lang="en"
+Proper meta tags (charset, viewport, description)
+Semantic HTML5 elements (header, nav, main, section, article, footer)
+Proper heading hierarchy (h1, h2, h3...)
+ARIA labels and accessibility attributes
+Alt text for all images
+Form labels and validation
+
+CSS Requirements:
+
+CSS reset and normalize
+CSS custom properties for design tokens
+Mobile-first responsive design
+Flexbox and CSS Grid layouts
+Smooth transitions and animations
+Print stylesheet considerations
+Proper vendor prefixes where needed
+
+JavaScript Requirements:
+
+Modern ES6+ syntax (const/let, arrow functions, destructuring)
+Error handling with try/catch blocks
+DOM ready event handling
+Event delegation for performance
+Debouncing for scroll/resize events
+Accessibility enhancements
+
+Responsive Breakpoints:
+
+Mobile: 320px - 767px
+Tablet: 768px - 1023px
+Desktop: 1024px+
+
+QUALITY CHECKLIST
+Before completion, ensure each variation:
+✓ Passes HTML5 validation
+✓ Passes CSS3 validation
+✓ Functions across modern browsers
+✓ Meets WCAG 2.1 AA accessibility standards
+✓ Loads in under 3 seconds
+✓ Works on mobile, tablet, and desktop
+✓ Follows the design-guide.json specifications
+✓ Includes semantic markup
+✓ Has descriptive comments and documentation
+✓ Uses proper error handling
+✓ Implements progressive enhancement
+DOCUMENTATION
+Each variation must include:
+
+Inline comments explaining complex code
+Brief comment at top of each file describing the variation approach
+Clean, readable code structure
+
+Always prioritize code quality, accessibility, performance, and maintainability. Create production-ready code that follows modern web development best practices.
+
+globs:
+alwaysApply: false
+---

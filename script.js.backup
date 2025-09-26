@@ -1,0 +1,860 @@
+/*
+ * Erevos - Dark Ops AI Intelligence - JavaScript
+ * Clean, accessible, performance-focused implementation
+ * Focus: Progressive enhancement, accessibility, and minimal dependencies
+ */
+
+'use strict';\n\n/**\n * Copy token address to clipboard\n */\nfunction copyTokenAddress() {\n  const fullAddress = \"4x7BmK2nQvCp8fGhX9rL3wY5sT1uV6eR7iO8pA9sD2fH3jK4mN5qW6eR7tY8uI9oP0\";\n  \n  try {\n    if (navigator.clipboard && window.isSecureContext) {\n      // Modern async clipboard API\n      navigator.clipboard.writeText(fullAddress).then(() => {\n        showCopyFeedback();\n        console.log('Token address copied to clipboard');\n      }).catch((err) => {\n        console.error('Clipboard API failed:', err);\n        fallbackCopy();\n      });\n    } else {\n      // Fallback for older browsers or non-secure contexts\n      fallbackCopy();\n    }\n  } catch (error) {\n    console.error('Copy function error:', error);\n    fallbackCopy();\n  }\n  \n  function fallbackCopy() {\n    try {\n      const textArea = document.createElement('textarea');\n      textArea.value = fullAddress;\n      textArea.style.position = 'fixed';\n      textArea.style.left = '-999999px';\n      textArea.style.top = '-999999px';\n      textArea.style.opacity = '0';\n      document.body.appendChild(textArea);\n      textArea.focus();\n      textArea.select();\n      textArea.setSelectionRange(0, fullAddress.length);\n      \n      const successful = document.execCommand('copy');\n      document.body.removeChild(textArea);\n      \n      if (successful) {\n        showCopyFeedback();\n        console.log('Token address copied using fallback method');\n      } else {\n        console.error('Fallback copy failed');\n        alert('Copy failed. Please manually copy: ' + fullAddress);\n      }\n    } catch (err) {\n      console.error('Fallback copy error:', err);\n      alert('Copy failed. Please manually copy: ' + fullAddress);\n    }\n  }\n  \n  function showCopyFeedback() {\n    const button = document.getElementById('tokenAddress');\n    if (!button) return;\n    \n    const tokenText = button.querySelector('.token-text');\n    const copyIndicator = button.querySelector('.copy-indicator');\n    \n    if (tokenText && copyIndicator) {\n      const originalText = tokenText.textContent;\n      const originalIcon = copyIndicator.textContent;\n      \n      // Show feedback\n      tokenText.textContent = 'Copied!';\n      copyIndicator.textContent = '✓';\n      \n      // Reset after 2 seconds\n      setTimeout(() => {\n        tokenText.textContent = originalText;\n        copyIndicator.textContent = originalIcon;\n      }, 2000);\n    }\n  }\n}
+
+/**
+ * Erevos UI Controller
+ * Handles core functionality with emphasis on accessibility and performance
+ */
+class ErevosUI {
+  constructor() {
+    this.isInitialized = false;
+    
+    this.init();
+  }
+
+  /**
+   * Initialize the application
+   */
+  init() {
+    try {
+      this.setupEventListeners();
+      this.setupAccessibilityFeatures();
+      this.setupPerformanceOptimizations();
+      this.setupSecurityFeatures();
+      this.setupTerminalClock();
+      
+      this.isInitialized = true;
+      console.log('Erevos Dark Ops UI initialized successfully');
+    } catch (error) {
+      console.error('Failed to initialize Erevos UI:', error);
+    }
+  }
+
+
+  /**
+   * Setup event listeners
+   */
+  setupEventListeners() {
+    // Smooth scrolling for anchor links
+    this.setupSmoothScrolling();
+    
+    // Form enhancements
+    this.setupFormEnhancements();
+    
+    // Button interactions
+    this.setupButtonInteractions();
+    
+    // Intelligence terminal animation
+    this.setupTerminalAnimation();
+    
+    // Scroll-triggered animations
+    this.setupScrollAnimations();
+    
+    // Parallax effects
+    this.setupParallaxEffects();
+    
+    // Advanced component interactions
+    this.setupAdvancedInteractions();
+  }
+
+  /**
+   * Setup smooth scrolling for anchor links
+   */
+  setupSmoothScrolling() {
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    
+    anchorLinks.forEach(link => {
+      link.addEventListener('click', (event) => {
+        const targetId = link.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          event.preventDefault();
+          
+          const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
+          const targetPosition = targetElement.offsetTop - headerHeight - 20;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+          
+          // Update focus for accessibility
+          targetElement.setAttribute('tabindex', '-1');
+          targetElement.focus();
+          targetElement.addEventListener('blur', () => {
+            targetElement.removeAttribute('tabindex');
+          }, { once: true });
+        }
+      });
+    });
+  }
+
+  /**
+   * Setup form enhancements
+   */
+  setupFormEnhancements() {
+    const forms = document.querySelectorAll('form');
+    
+    forms.forEach(form => {
+      // Add loading states
+      form.addEventListener('submit', (_event) => {
+        const submitButton = form.querySelector('button[type="submit"], input[type="submit"]');
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.setAttribute('aria-busy', 'true');
+          
+          const originalText = submitButton.textContent;
+          submitButton.textContent = 'Processing...';
+          
+          // Reset after a delay (in real app, this would be after actual submission)
+          setTimeout(() => {
+            submitButton.disabled = false;
+            submitButton.removeAttribute('aria-busy');
+            submitButton.textContent = originalText;
+          }, 2000);
+        }
+      });
+    });
+  }
+
+  /**
+   * Setup button interactions
+   */
+  setupButtonInteractions() {
+    const buttons = document.querySelectorAll('.btn');
+    
+    buttons.forEach(button => {
+      // Add ripple effect on click
+      button.addEventListener('click', this.createRippleEffect.bind(this));
+      
+      // Keyboard interaction feedback
+      button.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          button.classList.add('btn-active');
+        }
+      });
+      
+      button.addEventListener('keyup', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          button.classList.remove('btn-active');
+        }
+      });
+    });
+  }
+
+  /**
+   * Setup terminal animation for intelligence demo
+   */
+  setupTerminalAnimation() {
+    const terminalLines = document.querySelectorAll('.output-line');
+    if (terminalLines.length === 0) return;
+
+    // Advanced terminal animation with staggered delays
+    terminalLines.forEach((line, index) => {
+      const delay = line.dataset.delay ? parseInt(line.dataset.delay) : (index + 1) * 400 + 2000;
+      
+      setTimeout(() => {
+        line.classList.add('show');
+      }, delay);
+    });
+
+    // Typing animation for command
+    const command = document.querySelector('.typing-animation');
+    if (command) {
+      const text = command.textContent;
+      command.textContent = '';
+      command.style.width = '0';
+      
+      setTimeout(() => {
+        let i = 0;
+        const typeWriter = () => {
+          if (i < text.length) {
+            command.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 50 + Math.random() * 50);
+          }
+        };
+        typeWriter();
+      }, 500);
+    }
+
+    // Cursor blinking
+    const cursor = document.querySelector('.cursor');
+    if (cursor) {
+      setInterval(() => {
+        cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+      }, 530);
+    }
+  }
+
+  /**
+   * Create subtle ripple effect for buttons
+   */
+  createRippleEffect(event) {
+    const button = event.currentTarget;
+    const rect = button.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    
+    const ripple = document.createElement('span');
+    ripple.style.cssText = `
+      position: absolute;
+      width: ${size}px;
+      height: ${size}px;
+      left: ${x}px;
+      top: ${y}px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transform: scale(0);
+      animation: erevos-ripple 0.6s ease-out;
+      pointer-events: none;
+    `;
+    
+    // Ensure button has relative positioning
+    if (getComputedStyle(button).position === 'static') {
+      button.style.position = 'relative';
+    }
+    
+    button.appendChild(ripple);
+    
+    // Remove ripple after animation
+    setTimeout(() => {
+      ripple.remove();
+    }, 600);
+  }
+
+  /**
+   * Setup accessibility features
+   */
+  setupAccessibilityFeatures() {
+    // Announce theme changes to screen readers
+    this.createAriaLiveRegion();
+    
+    // Skip link functionality
+    this.setupSkipLink();
+    
+    // Focus management
+    this.setupFocusManagement();
+    
+    // Reduced motion support
+    this.setupReducedMotionSupport();
+    
+    // High contrast support
+    this.setupHighContrastSupport();
+  }
+
+  /**
+   * Create ARIA live region for announcements
+   */
+  createAriaLiveRegion() {
+    const liveRegion = document.createElement('div');
+    liveRegion.setAttribute('aria-live', 'polite');
+    liveRegion.setAttribute('aria-atomic', 'true');
+    liveRegion.className = 'sr-only';
+    liveRegion.id = 'erevos-aria-live-region';
+    document.body.appendChild(liveRegion);
+  }
+
+  /**
+   * Announce message to screen readers
+   */
+  announceToScreenReader(message) {
+    const liveRegion = document.getElementById('erevos-aria-live-region');
+    if (liveRegion) {
+      liveRegion.textContent = message;
+      
+      // Clear after announcement
+      setTimeout(() => {
+        liveRegion.textContent = '';
+      }, 1000);
+    }
+  }
+
+  /**
+   * Setup skip link functionality
+   */
+  setupSkipLink() {
+    const skipLink = document.querySelector('.skip-link');
+    if (skipLink) {
+      skipLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        const target = document.querySelector(skipLink.getAttribute('href'));
+        if (target) {
+          target.focus();
+        }
+      });
+    }
+  }
+
+  /**
+   * Setup focus management
+   */
+  setupFocusManagement() {
+    // Ensure focusable elements are properly managed
+    const focusableElements = document.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    
+    focusableElements.forEach(element => {
+      // Ensure all interactive elements have visible focus indicators
+      element.addEventListener('focus', () => {
+        element.classList.add('focused');
+      });
+      
+      element.addEventListener('blur', () => {
+        element.classList.remove('focused');
+      });
+    });
+  }
+
+  /**
+   * Setup reduced motion support
+   */
+  setupReducedMotionSupport() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (prefersReducedMotion) {
+      document.documentElement.classList.add('reduce-motion');
+    }
+  }
+
+  /**
+   * Setup high contrast support
+   */
+  setupHighContrastSupport() {
+    const prefersHighContrast = window.matchMedia('(prefers-contrast: high)').matches;
+    
+    if (prefersHighContrast) {
+      document.documentElement.classList.add('high-contrast');
+    }
+  }
+
+  /**
+   * Setup security features
+   */
+  setupSecurityFeatures() {
+    // Basic security measures for dark ops theme
+    this.setupCSPCompliance();
+    this.setupSecureNavigation();
+  }
+
+  /**
+   * Setup CSP compliance
+   */
+  setupCSPCompliance() {
+    // Ensure all inline styles are properly handled
+    // This would be expanded in a real security-focused application
+    console.log('CSP compliance measures initialized');
+  }
+
+  /**
+   * Setup secure navigation
+   */
+  setupSecureNavigation() {
+    // Add security attributes to external links
+    const externalLinks = document.querySelectorAll('a[href^="http"]:not([href*="' + window.location.hostname + '"])');
+    
+    externalLinks.forEach(link => {
+      if (!link.hasAttribute('rel')) {
+        link.setAttribute('rel', 'noopener noreferrer');
+      }
+      if (!link.hasAttribute('target')) {
+        link.setAttribute('target', '_blank');
+      }
+    });
+  }
+
+  /**
+   * Setup scroll-triggered animations
+   */
+  setupScrollAnimations() {
+    // Add animation classes to elements
+    const animatedElements = document.querySelectorAll('.feature-item, .intelligence-item, .stat-item, .integration-item');
+    animatedElements.forEach((el, index) => {
+      el.classList.add('animate-on-scroll');
+      if (index < 6) el.classList.add(`stagger-${index + 1}`);
+    });
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    animatedElements.forEach(el => observer.observe(el));
+  }
+
+  /**
+   * Setup parallax effects
+   */
+  setupParallaxEffects() {
+    const parallaxElements = document.querySelectorAll('.hero, .stats');
+    parallaxElements.forEach(el => el.classList.add('parallax-slow'));
+
+    let ticking = false;
+    const updateParallax = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrolled = window.pageYOffset;
+          const rate = scrolled * -0.5;
+          
+          parallaxElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+              el.style.transform = `translate3d(0, ${rate}px, 0)`;
+            }
+          });
+          
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', updateParallax, { passive: true });
+  }
+
+  /**
+   * Setup advanced component interactions
+   */
+  setupAdvancedInteractions() {
+    // Enhanced card hover effects
+    const cards = document.querySelectorAll('.feature-item, .intelligence-item, .integration-item');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', (e) => {
+        this.createParticleEffect(e.currentTarget);
+      });
+      
+      card.addEventListener('mousemove', (e) => {
+        this.updateCardTilt(e);
+      });
+      
+      card.addEventListener('mouseleave', (e) => {
+        this.resetCardTilt(e.currentTarget);
+      });
+    });
+
+    // Logo interaction
+    const logo = document.querySelector('.logo');
+    if (logo) {
+      logo.addEventListener('click', () => {
+        this.createLogoEffect();
+      });
+    }
+
+    // Terminal status indicators interaction
+    const statusIndicators = document.querySelectorAll('.status-indicator');
+    statusIndicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        const labels = ['TOR Network', 'VPN Connection', 'Proxy Chain'];
+        this.announceToScreenReader(`${labels[index]} status: Active`);
+      });
+    });
+  }
+
+  /**
+   * Create particle effect on card hover
+   */
+  createParticleEffect(element) {
+    const particles = 3;
+    for (let i = 0; i < particles; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.cssText = `
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--color-accent);
+        border-radius: 50%;
+        pointer-events: none;
+        top: ${Math.random() * 100}%;
+        left: ${Math.random() * 100}%;
+        animation: particle-float 2s ease-out forwards;
+      `;
+      element.appendChild(particle);
+      
+      setTimeout(() => particle.remove(), 2000);
+    }
+  }
+
+  /**
+   * Update card tilt effect
+   */
+  updateCardTilt(e) {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = (y - centerY) / 10;
+    const rotateY = (centerX - x) / 10;
+    
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+  }
+
+  /**
+   * Reset card tilt
+   */
+  resetCardTilt(card) {
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+  }
+
+  /**
+   * Create logo click effect
+   */
+  createLogoEffect() {
+    const logo = document.querySelector('.logo-icon');
+    if (logo) {
+      logo.style.animation = 'none';
+      setTimeout(() => {
+        logo.style.animation = 'logo-pulse 0.6s ease-out';
+      }, 10);
+    }
+  }
+
+  /**
+   * Setup terminal clock
+   */
+  setupTerminalClock() {
+    const clockElement = document.getElementById('terminal-time');
+    if (!clockElement) return;
+
+    const updateClock = () => {
+      const now = new Date();
+      const timeString = now.toTimeString().split(' ')[0]; // HH:MM:SS format
+      clockElement.textContent = timeString;
+    };
+
+    // Update immediately and then every second
+    updateClock();
+    setInterval(updateClock, 1000);
+  }
+
+  /**
+   * Setup performance optimizations
+   */
+  setupPerformanceOptimizations() {
+    // Lazy load images (if any are added)
+    this.setupLazyLoading();
+    
+    // Debounce scroll events
+    this.setupScrollOptimization();
+    
+    // Monitor performance
+    this.setupPerformanceMonitoring();
+  }
+
+  /**
+   * Setup lazy loading for images
+   */
+  setupLazyLoading() {
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+            imageObserver.unobserve(img);
+          }
+        });
+      });
+
+      document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+      });
+    }
+  }
+
+  /**
+   * Setup scroll optimization
+   */
+  setupScrollOptimization() {
+    let ticking = false;
+    
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          // Scroll-based functionality would go here
+          // For example, updating navigation highlight based on section
+          this.updateNavigationHighlight();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+  }
+
+  /**
+   * Update navigation highlight based on current section
+   */
+  updateNavigationHighlight() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+    
+    let currentSection = '';
+    const scrollPosition = window.scrollY + 100;
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        currentSection = section.getAttribute('id');
+      }
+    });
+    
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + currentSection) {
+        link.classList.add('active');
+      }
+    });
+    
+    // Update header opacity based on scroll
+    const header = document.querySelector('.header');
+    if (header) {
+      const opacity = Math.min(1, scrollPosition / 100);
+      header.style.background = `rgba(10, 10, 10, ${0.8 + opacity * 0.15})`;
+    }
+  }
+
+  /**
+   * Setup performance monitoring
+   */
+  setupPerformanceMonitoring() {
+    // Monitor Core Web Vitals
+    if ('web-vital' in window) {
+      // This would integrate with a real performance monitoring solution
+      console.log('Performance monitoring initialized for Erevos');
+    }
+    
+    // Simple performance logging
+    window.addEventListener('load', () => {
+      const loadTime = performance.now();
+      console.log(`Erevos loaded in ${loadTime.toFixed(2)}ms`);
+      
+      // Log navigation timing
+      if (performance.navigation) {
+        console.log('Navigation type:', performance.navigation.type);
+      }
+    });
+  }
+}
+
+/**
+ * Enhanced Error handling and logging for security-focused application
+ */
+class ErevosErrorHandler {
+  static init() {
+    // Global error handler with security considerations
+    window.addEventListener('error', (event) => {
+      const errorInfo = {
+        message: event.message,
+        filename: event.filename,
+        lineno: event.lineno,
+        colno: event.colno,
+        error: event.error,
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        url: window.location.href
+      };
+      
+      console.error('Erevos JavaScript error:', errorInfo);
+      
+      // In production, this would send errors to a secure logging service
+      // with proper data sanitization
+    });
+
+    // Unhandled promise rejections
+    window.addEventListener('unhandledrejection', (event) => {
+      console.error('Erevos unhandled promise rejection:', {
+        reason: event.reason,
+        timestamp: new Date().toISOString(),
+        url: window.location.href
+      });
+      
+      // Prevent the default browser behavior
+      event.preventDefault();
+    });
+
+    // Security-focused error reporting
+    window.addEventListener('securitypolicyviolation', (event) => {
+      console.error('CSP Violation:', {
+        blockedURI: event.blockedURI,
+        violatedDirective: event.violatedDirective,
+        originalPolicy: event.originalPolicy
+      });
+    });
+  }
+}
+
+/**
+ * Enhanced utility functions for dark ops theme
+ */
+const ErevosUtils = {
+  /**
+   * Debounce function calls
+   */
+  debounce(func, wait, immediate = false) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        timeout = null;
+        if (!immediate) func.apply(this, args);
+      };
+      const callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(this, args);
+    };
+  },
+
+  /**
+   * Throttle function calls
+   */
+  throttle(func, limit) {
+    let inThrottle;
+    return function executedFunction(...args) {
+      if (!inThrottle) {
+        func.apply(this, args);
+        inThrottle = true;
+        setTimeout(() => inThrottle = false, limit);
+      }
+    };
+  },
+
+  /**
+   * Check if element is in viewport
+   */
+  isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  },
+
+  /**
+   * Secure random string generation
+   */
+  generateSecureId(length = 16) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    
+    if (window.crypto && window.crypto.getRandomValues) {
+      const array = new Uint8Array(length);
+      window.crypto.getRandomValues(array);
+      for (let i = 0; i < length; i++) {
+        result += chars[array[i] % chars.length];
+      }
+    } else {
+      // Fallback for older browsers
+      for (let i = 0; i < length; i++) {
+        result += chars[Math.floor(Math.random() * chars.length)];
+      }
+    }
+    
+    return result;
+  },
+
+  /**
+   * Sanitize HTML to prevent XSS
+   */
+  sanitizeHTML(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+};
+
+// Add enhanced animation styles for Erevos theme
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes erevos-ripple {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes erevos-glow {
+    0%, 100% {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
+  }
+  
+  .btn-active {
+    transform: translateY(1px);
+  }
+  
+  .focused {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  }
+  
+  .nav-link.active {
+    color: var(--color-accent);
+  }
+  
+  .nav-link.active::after {
+    width: 100%;
+  }
+  
+  .reduce-motion * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .high-contrast .btn-secondary {
+    border-width: 2px;
+  }
+  
+  .high-contrast .feature-item:hover,
+  .high-contrast .intelligence-item:hover {
+    border-width: 2px;
+  }
+`;
+document.head.appendChild(style);
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    ErevosErrorHandler.init();
+    new ErevosUI();
+  });
+} else {
+  ErevosErrorHandler.init();
+  new ErevosUI();
+}
+
+// Export for testing or module usage
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { ErevosUI, ErevosErrorHandler, ErevosUtils };
+}

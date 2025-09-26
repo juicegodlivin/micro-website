@@ -1,0 +1,58 @@
+{
+  "name": "erevos-dark-ops",
+  "version": "1.0.1",
+  "description": "AI Agent Stack for Dark Operations - Unfiltered intelligence, real information, and powerful AI tools that explore beyond conventional boundaries",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx @web/dev-server --port=3000 --open",
+    "proxy": "node pump-proxy-secure.js",
+    "proxy-simple": "node pump-proxy.js",
+    "build": "echo 'Static site - no build process required'",
+    "lint": "npx eslint script.js",
+    "lint:fix": "npx eslint script.js --fix",
+    "validate": "npx html-validate index.html",
+    "test": "echo 'No tests specified yet'",
+    "deploy": "echo 'Deploy to your preferred hosting service'"
+  },
+  "keywords": [
+    "ai",
+    "intelligence",
+    "dark-ops",
+    "security",
+    "osint",
+    "threat-intelligence",
+    "unfiltered",
+    "agent-stack"
+  ],
+  "author": "Erevos Intelligence",
+  "license": "MIT",
+  "homepage": "https://github.com/your-username/erevos-dark-ops",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/erevos-dark-ops.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/erevos-dark-ops/issues"
+  },
+  "devDependencies": {
+    "@web/dev-server": "^0.4.6",
+    "eslint": "^9.15.0",
+    "html-validate": "^8.24.1",
+    "serve": "^14.2.3"
+  },
+  "optionalDependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^6.11.2",
+    "node-fetch": "^2.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "not op_mini all"
+  ]
+}
