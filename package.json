@@ -1,6 +1,6 @@
 {
   "name": "micro-website",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Micro AI Agent Stack - Next-generation prediction markets and trading intelligence for the Solana ecosystem",
   "main": "index.html",
   "scripts": {
@@ -8,7 +8,7 @@
     "dev": "npx @web/dev-server --port=3000 --open",
     "proxy": "node pump-proxy-secure.js",
     "proxy-simple": "node pump-proxy.js",
-    "build": "echo 'Static site - no build process required'",
+    "build": "echo 'Static site deployment - no build required'",
     "lint": "npx eslint script.js",
     "lint:fix": "npx eslint script.js --fix",
     "validate": "npx html-validate index.html dashboard.html docs.html",
