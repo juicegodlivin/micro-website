@@ -3,27 +3,8 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".",
   "installCommand": "npm install",
-  "devCommand": "npm run dev",
-  "public": true,
-  "github": {
-    "silent": true
-  },
-  "functions": {
-    "pump-proxy-secure.js": {
-      "runtime": "nodejs18.x"
-    },
-    "pump-proxy.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    {
-      "source": "/api/pump/(.*)",
-      "destination": "/pump-proxy-secure.js"
-    }
-  ],
   "redirects": [
     {
       "source": "/dashboard",
@@ -59,19 +40,11 @@
       ]
     },
     {
-      "source": "/api/(.*)",
+      "source": "/(.*\\.(css|js|html))",
       "headers": [
         {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, OPTIONS"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization"
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     }
