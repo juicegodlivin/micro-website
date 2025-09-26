@@ -16,26 +16,24 @@
       "runtime": "nodejs18.x"
     }
   },
-  "routes": [
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
     {
-      "src": "/",
-      "dest": "/index.html"
+      "source": "/api/pump/(.*)",
+      "destination": "/pump-proxy-secure.js"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/dashboard",
+      "destination": "/dashboard.html",
+      "permanent": false
     },
     {
-      "src": "/dashboard",
-      "dest": "/dashboard.html"
-    },
-    {
-      "src": "/docs",
-      "dest": "/docs.html"
-    },
-    {
-      "src": "/api/pump/(.*)",
-      "dest": "/pump-proxy-secure.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/docs",
+      "destination": "/docs.html", 
+      "permanent": false
     }
   ],
   "headers": [
