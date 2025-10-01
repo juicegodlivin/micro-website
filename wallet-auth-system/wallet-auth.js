@@ -13,7 +13,7 @@
 class WalletAuthController {
   constructor(options = {}) {
     this.loadingProgress = 0;
-    this.loadingDuration = options.loadingDuration || 10000; // 10 seconds default
+    this.loadingDuration = options.loadingDuration || 2000; // 2 seconds default
     this.isAuthenticated = false;
     this.connectedWallet = null;
     this.options = {
@@ -28,9 +28,19 @@ class WalletAuthController {
     }
   }
 
-  init() {
+  async init() {
     this.log('Initializing Wallet Authentication System...');
-    this.startLoadingSequence();
+    
+    // Check for existing wallet connection first
+    const hasExistingConnection = await this.checkExistingConnection();
+    if (hasExistingConnection) {
+      this.log('Existing wallet connection found, skipping auth flow');
+      this.skipToMainContent();
+    } else {
+      this.log('No existing connection, starting auth flow');
+      this.startLoadingSequence();
+    }
+    
     this.setupWalletButtons();
     this.setupWalletDetection();
   }
@@ -170,14 +180,157 @@ class WalletAuthController {
     const loadingScreen = document.getElementById('loadingScreen');
     const authScreen = document.getElementById('authScreen');
 
+    this.log('Transitioning from loading to auth screen');
+
     if (loadingScreen && authScreen) {
       loadingScreen.classList.add('fade-out');
       
       setTimeout(() => {
         loadingScreen.style.display = 'none';
+        authScreen.style.display = 'flex';
         authScreen.classList.remove('hidden');
+        
+        // Debug all screen states
+        this.debugScreenStates();
+        
         this.checkForExistingConnections();
       }, 1000);
+    } else {
+      this.log('Error: Could not find loading screen or auth screen elements');
+    }
+  }
+
+  /**
+   * Check for existing wallet connection in localStorage and browser
+   */
+  async checkExistingConnection() {
+    try {
+      const storedConnection = localStorage.getItem('micro_wallet_connection');
+      if (!storedConnection) {
+        return false;
+      }
+
+      const connectionData = JSON.parse(storedConnection);
+      const now = Date.now();
+      
+      // Check if connection is expired (24 hours)
+      if (now - connectionData.timestamp > 24 * 60 * 60 * 1000) {
+        this.log('Stored connection expired, clearing');
+        localStorage.removeItem('micro_wallet_connection');
+        return false;
+      }
+
+      // Verify the wallet is still actually connected
+      return await this.verifyWalletConnection(connectionData.walletType);
+    } catch (error) {
+      this.log('Error checking existing connection:', error);
+      localStorage.removeItem('micro_wallet_connection');
+      return false;
+    }
+  }
+
+  /**
+   * Verify that the wallet is still connected in the browser
+   */
+  async verifyWalletConnection(walletType) {
+    try {
+      switch (walletType) {
+        case 'phantom':
+          if (window.solana && window.solana.isPhantom) {
+            // Try to connect silently (won't show popup if already connected)
+            try {
+              const response = await window.solana.connect({ onlyIfTrusted: true });
+              if (response && response.publicKey) {
+                this.connectedWallet = {
+                  type: 'phantom',
+                  publicKey: response.publicKey.toString(),
+                  address: response.publicKey.toString()
+                };
+                this.isAuthenticated = true;
+                return true;
+              }
+            } catch (err) {
+              this.log('Phantom silent connection failed:', err);
+            }
+          }
+          break;
+          
+        case 'metamask':
+          if (window.ethereum && window.ethereum.isMetaMask) {
+            try {
+              const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+              if (accounts && accounts.length > 0) {
+                this.connectedWallet = {
+                  type: 'metamask',
+                  publicKey: accounts[0],
+                  address: accounts[0]
+                };
+                this.isAuthenticated = true;
+                return true;
+              }
+            } catch (err) {
+              this.log('MetaMask account check failed:', err);
+            }
+          }
+          break;
+          
+        case 'solflare':
+          if (window.solflare && window.solflare.isConnected) {
+            try {
+              const publicKey = window.solflare.publicKey;
+              if (publicKey) {
+                this.connectedWallet = {
+                  type: 'solflare',
+                  publicKey: publicKey.toString(),
+                  address: publicKey.toString()
+                };
+                this.isAuthenticated = true;
+                return true;
+              }
+            } catch (err) {
+              this.log('Solflare connection check failed:', err);
+            }
+          }
+          break;
+      }
+      
+      return false;
+    } catch (error) {
+      this.log('Error verifying wallet connection:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Skip directly to main content without loading/auth screens
+   */
+  skipToMainContent() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const authScreen = document.getElementById('authScreen');
+    const mainContent = document.getElementById('mainContent');
+
+    if (loadingScreen && authScreen && mainContent) {
+      this.log('Skipping to main content with existing connection');
+      
+      // Hide loading and auth screens immediately
+      loadingScreen.style.display = 'none';
+      loadingScreen.classList.remove('fade-out');
+      authScreen.style.display = 'none';
+      authScreen.classList.add('hidden');
+      
+      // Show main content
+      mainContent.style.display = '';  // Reset to default
+      mainContent.classList.remove('hidden');
+      
+      this.log('Main content shown via skip method');
+      this.debugScreenStates();
+      
+      // Dispatch wallet connected event for UI updates
+      if (this.connectedWallet) {
+        window.dispatchEvent(new CustomEvent('walletConnected', { 
+          detail: this.connectedWallet 
+        }));
+      }
     }
   }
 
@@ -186,7 +339,8 @@ class WalletAuthController {
    */
   async checkForExistingConnections() {
     try {
-      // Log existing connections but don't auto-skip auth (configurable)
+      // This method is now used after the auth screen is shown
+      // for wallets that might connect automatically
       if (window.solana && window.solana.isPhantom && window.solana.isConnected) {
         this.log('Phantom is already connected, but user must still authenticate');
       }
@@ -255,12 +409,15 @@ class WalletAuthController {
         this.connectedWallet = wallet;
         this.isAuthenticated = true;
         
+        // Store connection in localStorage for persistence
+        this.storeWalletConnection(wallet);
+        
         // Show success state
         walletName.textContent = 'CONNECTED';
         connectText.textContent = 'SUCCESS';
-        button.style.background = 'linear-gradient(135deg, rgba(255, 68, 68, 0.3), rgba(255, 68, 68, 0.1))';
-        button.style.borderColor = '#ff4444';
-        button.style.boxShadow = '0 0 20px rgba(255, 68, 68, 0.6)';
+        button.style.background = 'linear-gradient(135deg, rgba(0, 136, 254, 0.3), rgba(0, 136, 254, 0.1))';
+        button.style.borderColor = '#0088fe';
+        button.style.boxShadow = '0 0 20px rgba(0, 136, 254, 0.6)';
         
         // Dispatch custom event
         window.dispatchEvent(new CustomEvent('walletConnected', { 
@@ -426,13 +583,58 @@ class WalletAuthController {
     const authScreen = document.getElementById('authScreen');
     const mainContent = document.getElementById('mainContent');
 
+    this.log('Transitioning to main content after successful authentication');
+
     if (authScreen && mainContent) {
       authScreen.classList.add('fade-out');
       
       setTimeout(() => {
+        // Hide auth screen
         authScreen.style.display = 'none';
+        authScreen.classList.add('hidden');
+        
+        // Show main content
+        mainContent.style.display = '';  // Reset to default
         mainContent.classList.remove('hidden');
+        
+        this.log('Main content should now be visible');
+        this.debugScreenStates();
       }, 1000);
+    } else {
+      this.log('Error: Could not find auth screen or main content elements for transition');
+      this.log('Auth screen:', !!authScreen);
+      this.log('Main content:', !!mainContent);
+    }
+  }
+
+  /**
+   * Store wallet connection in localStorage
+   */
+  storeWalletConnection(wallet) {
+    try {
+      const connectionData = {
+        walletType: wallet.type,
+        timestamp: Date.now(),
+        publicKey: wallet.publicKey,
+        address: wallet.address
+      };
+      
+      localStorage.setItem('micro_wallet_connection', JSON.stringify(connectionData));
+      this.log('Wallet connection stored in localStorage');
+    } catch (error) {
+      this.log('Error storing wallet connection:', error);
+    }
+  }
+
+  /**
+   * Clear stored wallet connection
+   */
+  clearStoredConnection() {
+    try {
+      localStorage.removeItem('micro_wallet_connection');
+      this.log('Stored wallet connection cleared');
+    } catch (error) {
+      this.log('Error clearing stored connection:', error);
     }
   }
 
@@ -443,18 +645,85 @@ class WalletAuthController {
     this.isAuthenticated = false;
     this.connectedWallet = null;
     
+    // Clear stored connection
+    this.clearStoredConnection();
+    
+    // Dispatch disconnection event
+    window.dispatchEvent(new CustomEvent('walletDisconnected'));
+    
     const loadingScreen = document.getElementById('loadingScreen');
     const authScreen = document.getElementById('authScreen');
     const mainContent = document.getElementById('mainContent');
     
     if (loadingScreen && authScreen && mainContent) {
+      this.log('Starting forceReauth process');
+      
+      // Hide main content
       mainContent.classList.add('hidden');
+      mainContent.style.display = 'none';
+      this.log('Main content hidden');
+      
+      // Reset auth screen state
       authScreen.classList.add('hidden');
+      authScreen.style.display = 'none';
+      this.log('Auth screen reset and hidden');
+      
+      // Reset and show loading screen
       loadingScreen.style.display = 'flex';
       loadingScreen.classList.remove('fade-out');
+      this.log('Loading screen shown');
+      
+      // Reset progress bar
+      const progressBar = document.getElementById('progressBar');
+      const percentageDisplay = document.getElementById('loadingPercentage');
+      if (progressBar && percentageDisplay) {
+        progressBar.style.width = '0%';
+        percentageDisplay.textContent = '0%';
+        this.log('Progress bar reset');
+      }
       
       this.startLoadingSequence();
+    } else {
+      this.log('Error: Missing required elements for forceReauth');
+      this.log('Loading screen:', !!loadingScreen);
+      this.log('Auth screen:', !!authScreen);
+      this.log('Main content:', !!mainContent);
     }
+  }
+
+  /**
+   * Debug method to check screen states
+   */
+  debugScreenStates() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const authScreen = document.getElementById('authScreen');
+    const mainContent = document.getElementById('mainContent');
+    
+    this.log('=== SCREEN STATES DEBUG ===');
+    
+    if (loadingScreen) {
+      this.log('Loading Screen:');
+      this.log('- Display:', loadingScreen.style.display);
+      this.log('- Classes:', loadingScreen.className);
+      this.log('- Computed display:', window.getComputedStyle(loadingScreen).display);
+    }
+    
+    if (authScreen) {
+      this.log('Auth Screen:');
+      this.log('- Display:', authScreen.style.display);
+      this.log('- Classes:', authScreen.className);
+      this.log('- Computed display:', window.getComputedStyle(authScreen).display);
+      this.log('- Z-index:', window.getComputedStyle(authScreen).zIndex);
+    }
+    
+    if (mainContent) {
+      this.log('Main Content:');
+      this.log('- Display:', mainContent.style.display);
+      this.log('- Classes:', mainContent.className);
+      this.log('- Computed display:', window.getComputedStyle(mainContent).display);
+    }
+    
+    this.log('=== END DEBUG ===');
   }
 
   /**
@@ -472,6 +741,13 @@ let walletAuth = null;
 function initWalletAuth() {
   walletAuth = new WalletAuthController();
   window.walletAuth = walletAuth; // Expose globally
+  
+  // Expose debug function globally
+  window.debugWalletScreens = () => {
+    if (walletAuth) {
+      walletAuth.debugScreenStates();
+    }
+  };
 }
 
 if (document.readyState === 'loading') {

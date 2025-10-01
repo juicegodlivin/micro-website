@@ -7,11 +7,118 @@
     <meta name="description" content="Live prediction markets for emerging Solana tokens with AI-powered analysis">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="wallet-auth-system/wallet-auth.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="wallet-auth-system/wallet-auth.js"></script>
 </head>
 <body>
 
-    <div class="dashboard-layout">
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <!-- Video Background -->
+        <div class="loading-video-background">
+            <video autoplay muted loop>
+                <source src="Micro Background.mp4" type="video/mp4">
+            </video>
+        </div>
+        
+        <!-- Blue Filter Overlay -->
+        <div class="loading-video-overlay"></div>
+        
+        <!-- Loading Content -->
+        <div class="loading-container">
+            <!-- Animated Dots Loader -->
+            <div class="blood-drop-loader">
+                <div class="blood-drop"></div>
+                <div class="blood-drop"></div>
+                <div class="blood-drop"></div>
+            </div>
+            
+            <!-- Main Loading Text -->
+            <div class="loading-text">MICRO</div>
+            <div class="loading-subtitle">Initializing prediction markets...</div>
+            
+            <!-- Progress Bar -->
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <div class="loading-percentage" id="loadingPercentage">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Authentication Screen -->
+    <div class="auth-screen hidden" id="authScreen">
+        <!-- Background Effects -->
+        <div class="auth-backdrop"></div>
+        
+        <!-- Auth Container -->
+        <div class="auth-container">
+            <!-- Header -->
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <img src="Micro Logo.png" alt="Micro Logo" class="auth-logo-image">
+                </div>
+                <h1 class="auth-title">CONNECT WALLET</h1>
+                <p class="auth-subtitle">Select your blockchain interface to access Micro prediction markets</p>
+            </div>
+            
+            <!-- Body -->
+            <div class="auth-body">
+                <!-- Wallet Selection Grid -->
+                <div class="wallet-grid">
+                    <!-- Phantom Wallet -->
+                    <div class="wallet-card" data-wallet="phantom">
+                        <div class="wallet-card-inner">
+                            <img class="wallet-icon" src="wallet-auth-system/assets/phantom-wallet-logo.png" alt="Phantom Wallet" />
+                            <div class="wallet-info">
+                                <div class="wallet-name">PHANTOM</div>
+                                <div class="wallet-desc">SOL • PROTOCOL</div>
+                            </div>
+                            <div class="connect-text">CONNECT</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Solflare Wallet -->
+                    <div class="wallet-card" data-wallet="solflare">
+                        <div class="wallet-card-inner">
+                            <img class="wallet-icon" src="wallet-auth-system/assets/solflare-wallet-logo.jpg" alt="Solflare Wallet" />
+                            <div class="wallet-info">
+                                <div class="wallet-name">SOLFLARE</div>
+                                <div class="wallet-desc">SOL • SECURE</div>
+                            </div>
+                            <div class="connect-text">CONNECT</div>
+                        </div>
+                    </div>
+                    
+                    <!-- MetaMask Wallet -->
+                    <div class="wallet-card" data-wallet="metamask">
+                        <div class="wallet-card-inner">
+                            <img class="wallet-icon" src="wallet-auth-system/assets/metamask-wallet-logo.jpg" alt="MetaMask Wallet" />
+                            <div class="wallet-info">
+                                <div class="wallet-name">METAMASK</div>
+                                <div class="wallet-desc">ETH • EVM</div>
+                            </div>
+                            <div class="connect-text">CONNECT</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="auth-footer">
+                <p class="auth-disclaimer">
+                    🔒 SECURE & ENCRYPTED CONNECTION<br>
+                    NEVER STORE YOUR PRIVATE KEYS OR PERSONAL INFORMATION
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="main-content hidden" id="mainContent">
+        <div class="dashboard-layout">
         <!-- Enhanced Sidebar Navigation -->
         <aside class="dashboard-sidebar">
             <div class="sidebar-header">
@@ -21,12 +128,19 @@
                 </a>
                 <div class="sidebar-user">
                     <div class="user-avatar">
-                        <div class="avatar-circle">M</div>
+                        <div class="avatar-circle" id="userAvatar">M</div>
                     </div>
                     <div class="user-info">
-                        <span class="user-name">Micro Trader</span>
-                        <span class="user-status">Online</span>
+                        <span class="user-name" id="userName">Micro Trader</span>
+                        <span class="user-status" id="userStatus">Connecting...</span>
                     </div>
+                    <button class="disconnect-btn hidden" id="disconnectBtn" onclick="disconnectWallet()" title="Disconnect Wallet">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16,17 21,12 16,7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
             
@@ -49,7 +163,7 @@
                                 <circle cx="8" cy="8" r="1" fill="currentColor" opacity="0.8"/>
                             </svg>
                             <span class="nav-text">Live Markets</span>
-                            <span class="nav-badge">12</span>
+                            <span class="nav-badge">10</span>
                         </a></li>
                         <li><a href="#my-bets" class="nav-item" data-section="my-bets" onclick="showSection('my-bets', event)">
                             <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -58,7 +172,6 @@
                                 <circle cx="13" cy="3" r="1" fill="currentColor" opacity="0.8"/>
                             </svg>
                             <span class="nav-text">My Bets</span>
-                            <span class="nav-badge">8</span>
                         </a></li>
                         <li><a href="#trending-tokens" class="nav-item" data-section="trending-tokens" onclick="showSection('trending-tokens', event)">
                             <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -67,6 +180,7 @@
                                 <circle cx="2" cy="12" r="1" fill="currentColor" opacity="0.6"/>
                             </svg>
                             <span class="nav-text">Hot Tokens</span>
+                            <span class="nav-badge">12</span>
                         </a></li>
                         <li><a href="#pump-fun-feed" class="nav-item" data-section="pump-fun-feed" onclick="showSection('pump-fun-feed', event)">
                             <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -75,7 +189,7 @@
                                 <circle cx="12" cy="4" r="1" fill="#ff6b6b" opacity="0.8"/>
                             </svg>
                             <span class="nav-text">Pump.fun Feed</span>
-                            <span class="nav-badge">NEW</span>
+                            <span class="nav-badge">Soon</span>
                         </a></li>
                     </ul>
                 </div>
@@ -146,7 +260,7 @@
                                 <circle cx="13" cy="3" r="1" fill="#ff4757" opacity="0.9"/>
                             </svg>
                             <span class="nav-text">Live Session</span>
-                            <span class="nav-badge live-badge">LIVE</span>
+                            <span class="nav-badge live-badge">TBD</span>
                         </a></li>
                         <li><a href="#stream-schedule" class="nav-item" data-section="stream-schedule" onclick="showSection('stream-schedule', event)">
                             <svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -2377,12 +2491,157 @@
             console.log('Real-time CoinGecko API integration active');
             console.log('Loading live prediction markets on startup');
         });
+
+        // Wallet Profile Update System
+        function updateUserProfile(walletInfo) {
+            const userAvatar = document.getElementById('userAvatar');
+            const userName = document.getElementById('userName');
+            const userStatus = document.getElementById('userStatus');
+            const disconnectBtn = document.getElementById('disconnectBtn');
+            
+            if (walletInfo && userAvatar && userName && userStatus) {
+                // Update avatar with wallet logo
+                const walletLogos = {
+                    'phantom': 'wallet-auth-system/assets/phantom-wallet-logo.png',
+                    'solflare': 'wallet-auth-system/assets/solflare-wallet-logo.jpg',
+                    'metamask': 'wallet-auth-system/assets/metamask-wallet-logo.jpg'
+                };
+                
+                const logoPath = walletLogos[walletInfo.type.toLowerCase()];
+                if (logoPath) {
+                    // Clear text content and add image
+                    userAvatar.innerHTML = `<img src="${logoPath}" alt="${walletInfo.type} Logo" class="wallet-avatar-logo">`;
+                    // Add wallet-specific styling with logo class
+                    userAvatar.className = `avatar-circle wallet-${walletInfo.type.toLowerCase()} has-logo`;
+                } else {
+                    // Fallback to letter if logo not found
+                    const walletInitial = walletInfo.type.charAt(0).toUpperCase();
+                    userAvatar.innerHTML = '';
+                    userAvatar.textContent = walletInitial;
+                    // Add wallet-specific styling without logo class
+                    userAvatar.className = `avatar-circle wallet-${walletInfo.type.toLowerCase()}`;
+                }
+                
+                // Update name with truncated public key
+                const publicKey = walletInfo.publicKey || walletInfo.address;
+                if (publicKey) {
+                    // Show first 4 and last 4 characters of public key
+                    const truncatedKey = `${publicKey.substring(0, 4)}...${publicKey.substring(publicKey.length - 4)}`;
+                    userName.textContent = truncatedKey;
+                    // Add full key as data attribute for tooltip
+                    userName.setAttribute('data-full-key', publicKey);
+                    userName.setAttribute('title', 'Click to copy full address');
+                } else {
+                    // Fallback to wallet type if no public key
+                    userName.textContent = walletInfo.type.charAt(0).toUpperCase() + walletInfo.type.slice(1);
+                    userName.removeAttribute('data-full-key');
+                    userName.removeAttribute('title');
+                }
+                
+                // Update status to Active with wallet type
+                userStatus.textContent = `Active • ${walletInfo.type.charAt(0).toUpperCase() + walletInfo.type.slice(1)}`;
+                
+                // Show disconnect button
+                if (disconnectBtn) {
+                    disconnectBtn.classList.remove('hidden');
+                }
+                
+                console.log(`User profile updated for ${walletInfo.type} wallet: ${publicKey}`);
+            }
+        }
+
+        // Listen for wallet connection events
+        window.addEventListener('walletConnected', (event) => {
+            console.log('Wallet connected event received:', event.detail);
+            updateUserProfile(event.detail);
+        });
+
+        // Listen for wallet disconnection events
+        window.addEventListener('walletDisconnected', (event) => {
+            console.log('Wallet disconnected');
+            // Reset to default state
+            const userAvatar = document.getElementById('userAvatar');
+            const userName = document.getElementById('userName');
+            const userStatus = document.getElementById('userStatus');
+            const disconnectBtn = document.getElementById('disconnectBtn');
+            
+            if (userAvatar && userName && userStatus) {
+                userAvatar.innerHTML = '';
+                userAvatar.textContent = 'M';
+                userAvatar.className = 'avatar-circle';
+                userName.textContent = 'Micro Trader';
+                userName.removeAttribute('data-full-key');
+                userName.removeAttribute('title');
+                userStatus.textContent = 'Connecting...';
+                
+                // Hide disconnect button
+                if (disconnectBtn) {
+                    disconnectBtn.classList.add('hidden');
+                }
+            }
+        });
+
+        // Add click-to-copy functionality for public key
+        function setupPublicKeyCopy() {
+            const userName = document.getElementById('userName');
+            if (userName) {
+                userName.addEventListener('click', async () => {
+                    const fullKey = userName.getAttribute('data-full-key');
+                    if (fullKey) {
+                        try {
+                            await navigator.clipboard.writeText(fullKey);
+                            // Show temporary feedback
+                            const originalText = userName.textContent;
+                            userName.textContent = 'Copied!';
+                            userName.style.color = '#10b981';
+                            
+                            setTimeout(() => {
+                                userName.textContent = originalText;
+                                userName.style.color = '';
+                            }, 1500);
+                        } catch (err) {
+                            console.error('Failed to copy public key:', err);
+                            // Fallback for older browsers
+                            const textArea = document.createElement('textarea');
+                            textArea.value = fullKey;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            
+                            // Show feedback
+                            const originalText = userName.textContent;
+                            userName.textContent = 'Copied!';
+                            userName.style.color = '#10b981';
+                            
+                            setTimeout(() => {
+                                userName.textContent = originalText;
+                                userName.style.color = '';
+                            }, 1500);
+                        }
+                    }
+                });
+            }
+        }
+
+        // Initialize copy functionality
+        setupPublicKeyCopy();
+
+        // Disconnect wallet function
+        function disconnectWallet() {
+            if (window.walletAuth) {
+                window.walletAuth.forceReauth();
+            }
+        }
+
+        // Check if wallet is already connected on page load
+        setTimeout(() => {
+            if (window.walletAuth && window.walletAuth.isAuthenticated && window.walletAuth.connectedWallet) {
+                updateUserProfile(window.walletAuth.connectedWallet);
+            }
+        }, 1000);
     </script>
+        </div> <!-- End dashboard-layout -->
+    </div> <!-- End main-content -->
 </body>
-</html>
-</html>
-</html>
-</html>
-</html>
-</html>
 </html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro - Wallet Auth Test</title>
+    <link rel="stylesheet" href="wallet-auth-system/wallet-auth.css">
+    <script src="wallet-auth-system/wallet-auth.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <!-- Video Background -->
+        <div class="loading-video-background">
+            <video autoplay muted loop>
+                <source src="Micro Background.mp4" type="video/mp4">
+            </video>
+        </div>
+        
+        <!-- Blue Filter Overlay -->
+        <div class="loading-video-overlay"></div>
+        
+        <!-- Loading Content -->
+        <div class="loading-container">
+            <!-- Animated Dots Loader -->
+            <div class="blood-drop-loader">
+                <div class="blood-drop"></div>
+                <div class="blood-drop"></div>
+                <div class="blood-drop"></div>
+            </div>
+            
+            <!-- Main Loading Text -->
+            <div class="loading-text">MICRO</div>
+            <div class="loading-subtitle">Initializing prediction markets...</div>
+            
+            <!-- Progress Bar -->
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <div class="loading-percentage" id="loadingPercentage">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Authentication Screen -->
+    <div class="auth-screen hidden" id="authScreen">
+        <!-- Background Effects -->
+        <div class="auth-backdrop"></div>
+        
+        <!-- Auth Container -->
+        <div class="auth-container">
+            <!-- Header -->
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <img src="Micro Logo.png" alt="Micro Logo" class="auth-logo-image">
+                </div>
+                <h1 class="auth-title">CONNECT WALLET</h1>
+                <p class="auth-subtitle">Select your blockchain interface to access Micro prediction markets</p>
+            </div>
+            
+            <!-- Body -->
+            <div class="auth-body">
+                <!-- Wallet Selection Grid -->
+                <div class="wallet-grid">
+                    <!-- Phantom Wallet -->
+                    <div class="wallet-card" data-wallet="phantom">
+                        <div class="wallet-card-inner">
+                            <img class="wallet-icon" src="wallet-auth-system/assets/phantom-wallet-logo.png" alt="Phantom Wallet" />
+                            <div class="wallet-info">
+                                <div class="wallet-name">PHANTOM</div>
+                                <div class="wallet-desc">SOL • PROTOCOL</div>
+                            </div>
+                            <div class="connect-text">CONNECT</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Solflare Wallet -->
+                    <div class="wallet-card" data-wallet="solflare">
+                        <div class="wallet-card-inner">
+                            <img class="wallet-icon" src="wallet-auth-system/assets/solflare-wallet-logo.jpg" alt="Solflare Wallet" />
+                            <div class="wallet-info">
+                                <div class="wallet-name">SOLFLARE</div>
+                                <div class="wallet-desc">SOL • SECURE</div>
+                            </div>
+                            <div class="connect-text">CONNECT</div>
+                        </div>
+                    </div>
+                    
+                    <!-- MetaMask Wallet -->
+                    <div class="wallet-card" data-wallet="metamask">
+                        <div class="wallet-card-inner">
+                            <img class="wallet-icon" src="wallet-auth-system/assets/metamask-wallet-logo.jpg" alt="MetaMask Wallet" />
+                            <div class="wallet-info">
+                                <div class="wallet-name">METAMASK</div>
+                                <div class="wallet-desc">ETH • EVM</div>
+                            </div>
+                            <div class="connect-text">CONNECT</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="auth-footer">
+                <p class="auth-disclaimer">
+                    🔒 SECURE & ENCRYPTED CONNECTION<br>
+                    NEVER STORE YOUR PRIVATE KEYS OR PERSONAL INFORMATION
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="main-content hidden" id="mainContent">
+        <div style="padding: 2rem; text-align: center; color: white; background: #080c19; min-height: 100vh;">
+            <h1>🎉 Wallet Connected Successfully!</h1>
+            <p>Welcome to Micro Prediction Markets</p>
+            <p id="walletInfo"></p>
+            <button onclick="window.walletAuth.forceReauth()" style="padding: 1rem 2rem; background: #0088fe; color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 1rem;">
+                Disconnect & Reconnect
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Listen for wallet connection events
+        window.addEventListener('walletConnected', (event) => {
+            console.log('Wallet connected:', event.detail);
+            const walletInfo = document.getElementById('walletInfo');
+            if (walletInfo) {
+                walletInfo.innerHTML = `
+                    <strong>Connected Wallet:</strong> ${event.detail.type}<br>
+                    <strong>Address:</strong> ${event.detail.address.substring(0, 8)}...${event.detail.address.substring(event.detail.address.length - 8)}
+                `;
+            }
+        });
+
+        window.addEventListener('walletDisconnected', (event) => {
+            console.log('Wallet disconnected');
+        });
+    </script>
+</body>
+</html>
